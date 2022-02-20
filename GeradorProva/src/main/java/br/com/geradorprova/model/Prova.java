@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -27,12 +28,12 @@ public class Prova {
 	private String titulo;
 	
 	@Column
-	private Integer is_finalizada;
+	private boolean finalizada;
 
 	@Column
-	private Integer is_corrigida;
+	private boolean corrigida;
 	
-	@Transient
+	
 	private Set<Questao> questoes;
 	
 
@@ -60,20 +61,20 @@ public class Prova {
 		this.titulo = titulo;
 	}
 
-	public Integer getIs_finalizada() {
-		return is_finalizada;
+	public boolean isFinalizada() {
+		return finalizada;
 	}
 
-	public void setIs_finalizada(Integer is_finalizada) {
-		this.is_finalizada = is_finalizada;
+	public void setFinalizada(boolean finalizada) {
+		this.finalizada = finalizada;
 	}
 
-	public Integer getIs_corrigida() {
-		return is_corrigida;
+	public boolean isCorrigida() {
+		return corrigida;
 	}
 
-	public void setIs_corrigida(Integer is_corrigida) {
-		this.is_corrigida = is_corrigida;
+	public void setCorrigida(boolean corrigida) {
+		this.corrigida = corrigida;
 	}
 
 	public Set<Questao> getQuestoes() {
