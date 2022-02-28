@@ -1,7 +1,5 @@
 package br.com.geradorprova.model;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,22 +7,20 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.geradorprova.model.enumeration.Dificuldade;
 import br.com.geradorprova.model.enumeration.TipoQuestao;
 
 @Entity
-@Table(name = "tb_questao")
-public class Questao {
-	
+@Table(name = "tb_questao_historico")
+public class QuestaoHistorico {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_questao")
-	private Long idQuestao;
+	@Column(name = "id_questao_historico")
+	private Long idQuestaoHistorico;
+	
 	
 	@Column(length = 100)
 	private String enunciado;
@@ -36,20 +32,15 @@ public class Questao {
 	@Column
 	private Dificuldade dificuldade;
 
-	@Column(name = "id_tag")
-	private Integer idTag;
-	
-	@ManyToOne
+	@Column
 	private Tag tag;
-	
-	private Set<Resposta> respostas;
-	
-	public Long getIdQuestao() {
-		return idQuestao;
+
+	public Long getIdQuestaoHistorico() {
+		return idQuestaoHistorico;
 	}
 
-	public void setIdQuestao(Long idQuestao) {
-		this.idQuestao = idQuestao;
+	public void setIdQuestaoHistorico(Long idQuestaoHistorico) {
+		this.idQuestaoHistorico = idQuestaoHistorico;
 	}
 
 	public String getEnunciado() {
@@ -76,12 +67,12 @@ public class Questao {
 		this.dificuldade = dificuldade;
 	}
 
-	public Integer getIdTag() {
-		return idTag;
+	public Tag getTag() {
+		return tag;
 	}
 
-	public void setIdTag(Integer idTag) {
-		this.idTag = idTag;
+	public void setTag(Tag tag) {
+		this.tag = tag;
 	}
 	
 }

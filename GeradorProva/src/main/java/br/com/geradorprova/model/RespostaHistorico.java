@@ -8,31 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_resposta")
-public class Resposta {
+@Table(name = "tb_resposta_historico")
+public class RespostaHistorico {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_resposta")
-	private Long idResposta;
+	@Column(name = "id_resposta_historico")
+	private Long idRespostaHistorico;
 	
 	@Column
 	private String resposta;
 	
 	@Column(name = "resposta_correta")
 	private boolean respostaCorreta;
+	
+	@Column
+	private boolean selecionado;
 
 	@Column(name = "id_questao")
 	private Long idQuestao;
-	
-	
 
-	public Long getIdResposta() {
-		return idResposta;
+	public Long getIdRespostaHistorico() {
+		return idRespostaHistorico;
 	}
 
-	public void setIdResposta(Long idResposta) {
-		this.idResposta = idResposta;
+	public void setIdRespostaHistorico(Long idRespostaHistorico) {
+		this.idRespostaHistorico = idRespostaHistorico;
 	}
 
 	public String getResposta() {
@@ -51,6 +52,14 @@ public class Resposta {
 		this.respostaCorreta = respostaCorreta;
 	}
 
+	public boolean isSelecionado() {
+		return selecionado;
+	}
+
+	public void setSelecionado(boolean selecionado) {
+		this.selecionado = selecionado;
+	}
+
 	public Long getIdQuestao() {
 		return idQuestao;
 	}
@@ -58,5 +67,6 @@ public class Resposta {
 	public void setIdQuestao(Long idQuestao) {
 		this.idQuestao = idQuestao;
 	}
+	
 	
 }
