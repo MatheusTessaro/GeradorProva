@@ -6,11 +6,32 @@
   <!-- 
     CONTEUDO DA PAGINA 
   -->
-  <main class="container">
-    <div class="bg-light p-5 rounded">
-      <h2>Sistema Gerador de Provas</h2>
+  <main>
+    <div class="bg-light p-5 rounded ">
+      <h2>Gerenciador de Provas</h2>
     </div>
   </main>
+  <div class="container">
+  <div class="row">
+  	<div class="col-md-4 center">
+  		<h2 class="mt-4">Gerenciar Provas</h2>
+	 	<a class="btn-b btn btn-secondary btn-lg px-5 mt-3" aria-current="page" th:href="@{/prova/listar}">Listar Provas</a><br>
+	 	<a class="btn-b btn btn-secondary btn-lg px-5 mt-2" aria-current="page" th:href="@{/prova/novo}">Cadastrar Prova</a>
+	 </div>
+	 <div class="col-md-4 center">	
+	 	<h2 class="mt-4">Gerenciar Tags</h2>
+	 	<a class="btn-b btn btn-secondary btn-lg px-5 mt-3" aria-current="page" th:href="@{/tag/listar}">Listar Tags</a><br>
+	 	<a class="btn-b btn btn-secondary btn-lg px-5 mt-2" aria-current="page" th:href="@{/tag/novo}">Cadastrar Tag</a><br>
+	</div>
+
+  	<div class="col-md-4 center">
+  	<h2 class="mt-4">Gerenciar Questões</h2>
+	 	 <a class="btn-b btn btn-secondary btn-lg px-5 mt-3" aria-current="page" th:href="@{/questao/listar}">Listar Questões</a><br>
+        <a class="btn-b btn btn-secondary btn-lg px-5 mt-2 mb-5" aria-current="page" th:href="@{/questao/novo}">Cadastrar Questões</a>
+	</div>
+	</div>
+  </div>
+  
   <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>

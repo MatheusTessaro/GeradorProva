@@ -33,7 +33,13 @@ public class QuestaoHistorico {
 	private Dificuldade dificuldade;
 
 	@Column
-	private Tag tag;
+	private String tag;
+	
+	@Column(name = "id_questao")
+	private Long idQuestao;
+	
+	@Column(name = "id_prova")
+	private Long idProva;
 
 	public Long getIdQuestaoHistorico() {
 		return idQuestaoHistorico;
@@ -67,11 +73,11 @@ public class QuestaoHistorico {
 		this.dificuldade = dificuldade;
 	}
 
-	public Tag getTag() {
+	public String getTag() {
 		return tag;
 	}
 
-	public void setTag(Tag tag) {
+	public void setTag(String tag) {
 		this.tag = tag;
 	}
 	

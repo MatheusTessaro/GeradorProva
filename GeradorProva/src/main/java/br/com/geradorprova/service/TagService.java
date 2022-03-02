@@ -15,8 +15,12 @@ public class TagService {
 	@Autowired
 	TagRepository daoTag;
 	
+//	DAO<Tag> dao = new DAO<>(Tag.class);
+	
 	
 	public void saveTag(Tag tag) {
+		
+//		dao.abrirT().incluirT(tag).fecharT();
 		
 		daoTag.save(tag);
 	}

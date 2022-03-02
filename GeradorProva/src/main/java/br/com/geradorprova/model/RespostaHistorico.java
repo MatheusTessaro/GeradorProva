@@ -25,7 +25,7 @@ public class RespostaHistorico {
 	@Column
 	private boolean selecionado;
 
-	@Column(name = "id_questao")
+	@Column(name = "id_questao_historico")
 	private Long idQuestao;
 
 	public Long getIdRespostaHistorico() {

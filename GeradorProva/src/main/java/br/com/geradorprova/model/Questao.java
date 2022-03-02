@@ -9,7 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -40,8 +40,10 @@ public class Questao {
 	private Integer idTag;
 	
 	@ManyToOne
+	@JoinColumn
 	private Tag tag;
 	
+	@OneToMany
 	private Set<Resposta> respostas;
 	
 	public Long getIdQuestao() {

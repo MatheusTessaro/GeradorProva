@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="head :: head"></head>
+
+<body>
+	<!-- 
+    BARRA DE NAVEGACAO 
+  -->
+	<div th:replace="menu :: menu"></div>
+	<!-- 
+    CONTEUDO DA PAGINA 
+  -->
+	<main class="container">
+		<div class="bg-light p-5 rounded">
+			<h3>Gerenciar Questão</h3>
+
+			<div th:switch="${pessoa.id>0}">
+				<p th:case="${true}">Atualizar Questão</p>
+				<p th:case="*">Cadastro Questão</p>
+			</div>
+
+			<form th:object="${pessoa}" th:action="@{/pessoas/save/}"
+				method="POST">
+				<input type="hidden" th:field="${pessoa.id}" th:if="${pessoa.id}" />
+
+				<div class="row">
+					<div class="col-6">
+						<label class="form-label" for="tag">Tag</label>
+						<input type="hidden">
+						<select name="" id="" class="form-control select2-single"></select>
+					</div>
+	
+					<div class="col-6">
+						<label class="form-label" for="dificuldade">Grau de Dificuldade</label>
+						<input type="hidden">
+						<select name="" id="" class="form-control select2-single">
+							<option value="facil">Fácil</option>
+  							<option value="medio" selected>Médio</option>
+  							<option value="dificil">Difícil</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-6">
+						<label class="form-label" for="tipo">Tipo de Questão</label>
+						<input type="hidden">
+						<select name="" id=""  class="form-control select2-single">
+							<option value="0">Aberta</option>
+  							<option value="1" selected>Multipla</option>
+  							<option value="2">Única</option>
+						</select>
+					</div>
+				</div>
+
+				<div th:switch="${1}">
+					<!-- 
+						QUESTÃO ABERTA 
+						th:case="${0}"
+					-->
+
+					<div >
+						<div class="row">
+							<div class="col-12">
+								<label class="form-label" for="aberta">Enunciado:</label>
+								<textarea class="form-control" id="" name="aberta" placeholder="Enunciado da questão"
+								rows="3" cols="40">
+								</textarea>
+						</div>
+						</div>
+					</div>
+
+
+					<!-- 
+						MULTIPLA ESCOLHA 
+						th:case="${1}"
+					-->
+
+					<div>
+						<div class="row">
+							<div class="col-12">
+									<label class="form-label" for="aberta">Enunciado:</label>
+									<textarea class="form-control" id="" name="aberta" placeholder="Enunciado da questão"
+									rows="3" cols="40">
+									</textarea>
+							</div>
+						</div>
+		
+						<div class="row">
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="checkbox" name="opcaoM" value="opm1" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11 mb-3">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+		
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="checkbox" name="opcaoM" value="opm2" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11 mb-3">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+		
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="checkbox" name="opcaoM" value="opm3" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11 mb-3">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+		
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="checkbox" name="opcaoM" value="opm4" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11 mb-3">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+		
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="checkbox" name="opcaoM" value="opm5" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- 
+						ÚNICA ESCOLHA 
+						th:case="${2}"
+					-->
+
+					<div >
+						<div class="row">
+							<div class="col-12">
+									<label class="form-label" for="aberta">Enunciado:</label>
+									<textarea class="form-control" id="" name="aberta" placeholder="Enunciado da questão"
+									rows="3" cols="40">
+									</textarea>
+							</div>
+						</div>
+		
+						<div class="row">
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="RADIO" name="opcao" value="op1" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11 mb-3">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+		
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="RADIO" name="opcao" value="op2" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11 mb-3">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+		
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="RADIO" name="opcao" value="op3" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11 mb-3">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+		
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="RADIO" name="opcao" value="op4" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11 mb-3">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+		
+							<div class="col-1 center mt-2">
+								<input class="form-label" type="RADIO" name="opcao" value="op5" style="height: 20px; width: 20px;">	
+							</div>
+							<div class="col-11">
+								<input
+									type="text" th:field="*{nome}" class="form-control"
+									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+								<span class="error" th:if="${#fields.hasErrors('nome')}"
+									th:errors="*{nome}">campo invalido</span>
+							</div>
+						</div>
+		
+		
+						<div class="mb-3">
+		
+							<p th:switch="${pessoa.id>0}">
+								<button th:case="${true}" type="submit"
+									class="btn-c btn btn-secondary active my-3">Atualizar</button>
+								<button th:case="*" type="submit"
+									class="btn-c btn btn-secondary active my-3">Adicionar</button>
+							</p>
+		
+						</div>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</main>
+	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

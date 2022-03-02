@@ -36,7 +36,7 @@ public class TagController {
 		return "redirect:/tag/listar";
 	}
 	
-	@PostMapping("/deletar/{id}")
+	@GetMapping("/deletar/{id}")
 	public String deleteTag(@PathVariable Long id, Model model) {
 		
 		tagService.deleteTag(id);
@@ -44,7 +44,7 @@ public class TagController {
 		return "redirect:/tag/listar";
 	}
 	
-	@PostMapping("/editar/{id}")
+	@GetMapping("/editar/{id}")
 	public String tagFormEdit(@PathVariable Long id, Model model) {
 		
 		Tag tag = tagService.findById(id);
@@ -55,7 +55,7 @@ public class TagController {
 	
 	@GetMapping("/listar")
 	public String ListTags(Model model) {
-		model.addAttribute("taglist", tagService.listTag());
+		model.addAttribute("tagList", tagService.listTag());
 		
 		return "tag/listar.html";
 	}

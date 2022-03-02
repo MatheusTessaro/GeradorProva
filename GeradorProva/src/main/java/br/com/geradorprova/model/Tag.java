@@ -17,7 +17,7 @@ public class Tag {
 	private Long idTag;
 	
 	@Column(length = 30)
-	private String tag;
+	private String nome;
 	
 	
 
@@ -29,12 +29,12 @@ public class Tag {
 		this.idTag = idTag;
 	}
 
-	public String getTag() {
-		return tag;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	
+
 }
