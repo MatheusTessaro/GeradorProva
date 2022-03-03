@@ -15,14 +15,14 @@
 		<div class="bg-light p-5 rounded">
 			<h3>Gerenciar Questão</h3>
 
-			<div th:switch="${pessoa.id>0}">
+			<div th:switch="${questao.idQuestao>0}">
 				<p th:case="${true}">Atualizar Questão</p>
 				<p th:case="*">Cadastro Questão</p>
 			</div>
 
-			<form th:object="${pessoa}" th:action="@{/pessoas/save/}"
+			<form th:object="${questao}" th:action="@{/questao/salvar/}"
 				method="POST">
-				<input type="hidden" th:field="${pessoa.id}" th:if="${pessoa.id}" />
+				<input type="hidden" th:field="${questao.idQuestao}" th:if="${questao.idQuestao}" />
 
 				<div class="row">
 					<div class="col-6">

@@ -22,7 +22,7 @@ public class Resposta {
 	private String resposta;
 	
 	@Column(name = "resposta_correta")
-	private boolean respostaCorreta;
+	private Integer respostaCorreta;
 
 	@Column(name = "id_questao")
 	private Long idQuestao;
@@ -47,11 +47,12 @@ public class Resposta {
 		this.resposta = resposta;
 	}
 
-	public boolean isRespostaCorreta() {
+
+	public Integer getRespostaCorreta() {
 		return respostaCorreta;
 	}
 
-	public void setRespostaCorreta(boolean respostaCorreta) {
+	public void setRespostaCorreta(Integer respostaCorreta) {
 		this.respostaCorreta = respostaCorreta;
 	}
 

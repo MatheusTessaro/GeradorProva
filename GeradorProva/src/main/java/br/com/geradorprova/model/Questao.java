@@ -85,5 +85,23 @@ public class Questao {
 	public void setIdTag(Integer idTag) {
 		this.idTag = idTag;
 	}
+
+	public Tag getTag() {
+		return tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
+	}
+
+	public Set<Resposta> getRespostas() {
+		return respostas;
+	}
+
+	public void setRespostas(Set<Resposta> respostas) {
+		this.respostas = respostas;
+	}
+	
+	
 	
 }

@@ -29,7 +29,7 @@ public class TagController {
 	}
 	
 	@PostMapping("/salvar")
-	public String saveTag(@Valid Tag tag, Model model) {
+	public String save(@Valid Tag tag, Model model) {
 		
 		tagService.saveTag(tag);
 		
@@ -37,7 +37,7 @@ public class TagController {
 	}
 	
 	@GetMapping("/deletar/{id}")
-	public String deleteTag(@PathVariable Long id, Model model) {
+	public String delete(@PathVariable Long id, Model model) {
 		
 		tagService.deleteTag(id);
 		
@@ -45,7 +45,7 @@ public class TagController {
 	}
 	
 	@GetMapping("/editar/{id}")
-	public String tagFormEdit(@PathVariable Long id, Model model) {
+	public String formEdit(@PathVariable Long id, Model model) {
 		
 		Tag tag = tagService.findById(id);
 		model.addAttribute("tag", tag);
@@ -54,7 +54,7 @@ public class TagController {
 	}
 	
 	@GetMapping("/listar")
-	public String ListTags(Model model) {
+	public String list(Model model) {
 		model.addAttribute("tagList", tagService.listTag());
 		
 		return "tag/listar.html";

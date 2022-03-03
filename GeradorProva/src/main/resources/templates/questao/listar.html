@@ -14,7 +14,7 @@
   -->
 	<main class="container">
 		<a class="btn btn-c btn-secondary active my-3" role="button"
-			th:href="@{/pessoas/new}"> <i class="bi bi-plus-square"></i>
+			th:href="@{/questao/novo}"> <i class="bi bi-plus-square"></i>
 			Questão
 		</a>
 
@@ -34,15 +34,15 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="p: ${pessoaList}">
-							<td th:text="${p.id}" />
-							<td th:text="${p.nome}" />
-							<td th:text="${{p.dataNasc}}" />
-							<td th:text="${p.nome}" />
-							<td><a th:href="@{/pessoas/edit/{id}(id=${p.id})}"> <i class="bi bi-pencil-square"
+						<tr th:each="q: ${questaoList}">
+							<td th:text="${q.idQuestao}" />
+							<td th:text="${q.nome}" />
+							<td th:text="${q.dataNasc}" />
+							<td th:text="${q.dificuldade}" />
+							<td><a th:href="@{/pessoas/edit/{id}(id=${q.idQuestao})}"> <i class="bi bi-pencil-square"
 										title="editar"></i>
 								</a></td>
-							<td><a th:href="@{/pessoas/delete/{id}(id=${p.id})}"> <i class="bi bi-trash"
+							<td><a th:href="@{/pessoas/delete/{id}(id=${q.idQuestao})}"> <i class="bi bi-trash"
 										title="delete"></i>
 								</a></td>
 						</tr>

@@ -20,10 +20,10 @@ public class RespostaHistorico {
 	private String resposta;
 	
 	@Column(name = "resposta_correta")
-	private boolean respostaCorreta;
+	private Integer respostaCorreta;
 	
 	@Column
-	private boolean selecionado;
+	private Integer selecionado;
 
 	@Column(name = "id_questao_historico")
 	private Long idQuestao;
@@ -44,19 +44,19 @@ public class RespostaHistorico {
 		this.resposta = resposta;
 	}
 
-	public boolean isRespostaCorreta() {
+	public Integer getRespostaCorreta() {
 		return respostaCorreta;
 	}
 
-	public void setRespostaCorreta(boolean respostaCorreta) {
+	public void setRespostaCorreta(Integer respostaCorreta) {
 		this.respostaCorreta = respostaCorreta;
 	}
 
-	public boolean isSelecionado() {
+	public Integer getSelecionado() {
 		return selecionado;
 	}
 
-	public void setSelecionado(boolean selecionado) {
+	public void setSelecionado(Integer selecionado) {
 		this.selecionado = selecionado;
 	}
 

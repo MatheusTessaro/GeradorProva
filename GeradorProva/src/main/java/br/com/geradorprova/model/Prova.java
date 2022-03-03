@@ -26,10 +26,10 @@ public class Prova {
 	private String titulo;
 	
 	@Column
-	private boolean finalizada;
+	private Integer finalizada;
 
 	@Column
-	private boolean corrigida;
+	private Integer corrigida;
 	
 	@OneToMany
 	private Set<Questao> questoes;
@@ -59,19 +59,19 @@ public class Prova {
 		this.titulo = titulo;
 	}
 
-	public boolean isFinalizada() {
+	public Integer getFinalizada() {
 		return finalizada;
 	}
 
-	public void setFinalizada(boolean finalizada) {
+	public void setFinalizada(Integer finalizada) {
 		this.finalizada = finalizada;
 	}
 
-	public boolean isCorrigida() {
+	public Integer getCorrigida() {
 		return corrigida;
 	}
 
-	public void setCorrigida(boolean corrigida) {
+	public void setCorrigida(Integer corrigida) {
 		this.corrigida = corrigida;
 	}
 
