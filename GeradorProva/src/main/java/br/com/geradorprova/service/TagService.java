@@ -18,24 +18,20 @@ public class TagService {
 //	DAO<Tag> dao = new DAO<>(Tag.class);
 	
 	
-	public void saveTag(Tag tag) {
+	public void save(Tag tag) {
 		
 //		dao.abrirT().incluirT(tag).fecharT();
 		
 		daoTag.save(tag);
 	}
 	
-	public void deleteTag(Long id) {
+	public void delete(Long id) {
 		
 		daoTag.deleteById(id);
 	}
+
 	
-	public void updateTag(Tag tag) {
-		
-		daoTag.save(tag);
-	}
-	
-	public List<Tag> listTag() {
+	public List<Tag> list() {
 		List<Tag> tags = new ArrayList<>();
 		
 		tags = daoTag.findAll();

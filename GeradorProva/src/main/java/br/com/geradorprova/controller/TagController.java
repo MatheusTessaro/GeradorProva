@@ -31,7 +31,7 @@ public class TagController {
 	@PostMapping("/salvar")
 	public String save(@Valid Tag tag, Model model) {
 		
-		tagService.saveTag(tag);
+		tagService.save(tag);
 		
 		return "redirect:/tag/listar";
 	}
@@ -39,7 +39,7 @@ public class TagController {
 	@GetMapping("/deletar/{id}")
 	public String delete(@PathVariable Long id, Model model) {
 		
-		tagService.deleteTag(id);
+		tagService.delete(id);
 		
 		return "redirect:/tag/listar";
 	}
@@ -55,7 +55,7 @@ public class TagController {
 	
 	@GetMapping("/listar")
 	public String list(Model model) {
-		model.addAttribute("tagList", tagService.listTag());
+		model.addAttribute("tagList", tagService.list());
 		
 		return "tag/listar.html";
 	}
