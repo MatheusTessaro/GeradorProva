@@ -36,15 +36,19 @@
 					<tbody>
 						<tr th:each="q: ${questaoList}">
 							<td th:text="${q.idQuestao}" />
-							<td th:text="${q.nome}" />
-							<td th:text="${q.dataNasc}" />
+							<td th:text="${q.enunciado}" />
+							<td th:text="${q._tag}" />
 							<td th:text="${q.dificuldade}" />
-							<td><a th:href="@{/pessoas/edit/{id}(id=${q.idQuestao})}"> <i class="bi bi-pencil-square"
+							<td>
+								<a th:href="@{/questao/editar/{id}(id=${q.idQuestao})}"> <i class="bi bi-pencil-square"
 										title="editar"></i>
-								</a></td>
-							<td><a th:href="@{/pessoas/delete/{id}(id=${q.idQuestao})}"> <i class="bi bi-trash"
+								</a>
+							</td>
+							<td>
+								<a th:href="@{/questao/deletar/{id}(id=${q.idQuestao})}"> <i class="bi bi-trash"
 										title="delete"></i>
-								</a></td>
+								</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>

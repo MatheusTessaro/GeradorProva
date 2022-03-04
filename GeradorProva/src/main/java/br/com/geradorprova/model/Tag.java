@@ -16,7 +16,7 @@ public class Tag {
 	@Column(name = "id_tag")
 	private Long idTag;
 	
-	@Column(length = 30)
+	@Column(length = 50)
 	private String nome;
 	
 	

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -18,9 +19,6 @@ public class Prova {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_prova")
 	private Long idProva;
-
-	@Column
-	private String materia;
 	
 	@Column
 	private String titulo;
@@ -32,7 +30,8 @@ public class Prova {
 	private Integer corrigida;
 	
 	@OneToMany
-	private Set<Questao> questoes;
+	@JoinColumn(name = "id_prova")
+	private Set<QuestaoHistorico> questoes;
 	
 
 	public Long getIdProva() {
@@ -41,14 +40,6 @@ public class Prova {
 
 	public void setIdProva(Long idProva) {
 		this.idProva = idProva;
-	}
-
-	public String getMateria() {
-		return materia;
-	}
-
-	public void setMateria(String materia) {
-		this.materia = materia;
 	}
 
 	public String getTitulo() {
@@ -75,13 +66,12 @@ public class Prova {
 		this.corrigida = corrigida;
 	}
 
-	public Set<Questao> getQuestoes() {
+	public Set<QuestaoHistorico> getQuestoes() {
 		return questoes;
 	}
 
-	public void setQuestoes(Set<Questao> questoes) {
+	public void setQuestoes(Set<QuestaoHistorico> questoes) {
 		this.questoes = questoes;
 	}
-	
-	
+
 }

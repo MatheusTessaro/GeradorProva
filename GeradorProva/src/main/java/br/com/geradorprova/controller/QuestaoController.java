@@ -1,5 +1,7 @@
 package br.com.geradorprova.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,10 @@ public class QuestaoController{
 
 	@GetMapping("/listar")
 	public String list(Model model) {
+		
+		List<Questao> questoes = questaoService.listAll();
+		
+		model.addAttribute("questaoList", questoes);
 		
 		return "questao/listar";
 	}
