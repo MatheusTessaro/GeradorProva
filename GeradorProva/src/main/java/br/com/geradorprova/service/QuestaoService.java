@@ -1,8 +1,9 @@
 package br.com.geradorprova.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,8 @@ public class QuestaoService {
 			return;
 		}
 		
-		Set<Resposta> respostas = new HashSet<>();
+		Set<Resposta> respostas = questao.getRespostas();
+		if(respostas != null && !respostas.isEmpty())
 		
 		for(Resposta resp : questao.getRespostas()) {
 			daoResposta.save(resp);
@@ -57,6 +59,17 @@ public class QuestaoService {
 		}
 		
 		return questoes;
+	}
+	
+	public void delete(Long id) {
+		
+		daoQuestao.deleteById(id);
+	}
+	
+	
+	public List<Tag> findAllTags() {
+		
+		return daoTag.findAll();
 	}
 	
 }

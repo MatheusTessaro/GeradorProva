@@ -28,7 +28,10 @@
 					<div class="col-6">
 						<label class="form-label" for="tag">Tag</label>
 						<input type="hidden">
-						<select name="" id="" class="form-control select2-single"></select>
+						
+						<select th:field="*{idTag}" name="" id="" class="form-control select2-single">
+							<option th:each="tag : ${tagList}" th:value="${tag.idTag}" th:text="${tag.nome}">
+						</select>
 					</div>
 	
 					<div class="col-6">
@@ -93,10 +96,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -104,10 +107,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -115,10 +118,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -126,10 +129,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -137,10 +140,10 @@
 							</div>
 							<div class="col-11">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 						</div>
 					</div>
@@ -167,10 +170,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -178,10 +181,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -189,10 +192,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -200,10 +203,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -211,17 +214,17 @@
 							</div>
 							<div class="col-11">
 								<input
-									type="text" th:field="*{nome}" class="form-control"
+									type="text" th:field="*{enunciado}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('nome')}"
-									th:errors="*{nome}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
+									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 						</div>
 		
 		
 						<div class="mb-3">
 		
-							<p th:switch="${questao.id>0}">
+							<p th:switch="${questao.idQuestao>0}">
 								<button th:case="${true}" type="submit"
 									class="btn-c btn btn-secondary active my-3">Atualizar</button>
 								<button th:case="*" type="submit"

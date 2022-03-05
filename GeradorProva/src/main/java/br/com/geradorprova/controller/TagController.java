@@ -37,7 +37,7 @@ public class TagController {
 	}
 	
 	@GetMapping("/deletar/{id}")
-	public String delete(@PathVariable Long id, Model model) {
+	public String delete(@PathVariable Long id) {
 		
 		tagService.delete(id);
 		

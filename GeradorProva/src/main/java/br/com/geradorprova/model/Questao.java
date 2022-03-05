@@ -2,6 +2,7 @@ package br.com.geradorprova.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -116,7 +117,6 @@ public class Questao {
 	public void setRespostas(Set<Resposta> respostas) {
 		this.respostas = respostas;
 	}
-	
 	
 	
 }

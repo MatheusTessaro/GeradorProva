@@ -26,7 +26,8 @@ public class QuestaoController{
 	public String formNew(Model model) {
 		Questao questao = new Questao();
 		model.addAttribute(questao);
-
+		model.addAttribute("tagList", questaoService.findAllTags());
+		
 		return "questao/form.html";
 	}
 	
@@ -37,8 +38,10 @@ public class QuestaoController{
 		return "redirect:/questao/listar";
 	}
 
-	@GetMapping("/deletar")
-	public String delete(@PathVariable Long id, Model model) {
+	@GetMapping("/deletar/{id}")
+	public String delete(@PathVariable Long id) {
+		
+		questaoService.delete(id);
 		
 		return "redirect:/questao/listar";
 	}
