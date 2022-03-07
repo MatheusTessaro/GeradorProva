@@ -1,7 +1,8 @@
 package br.com.geradorprova.model;
 
-import java.util.Set;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_prova")
@@ -29,10 +31,18 @@ public class Prova {
 	@Column
 	private Integer corrigida;
 	
-	@OneToMany
-	@JoinColumn(name = "id_prova")
-	private Set<QuestaoHistorico> questoes;
+	@Transient
+	private Long idTag;
 	
+	@Column
+	private Double nota;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_prova")
+	private List<QuestaoHistorico> questoes;
+	
+	@Transient
+	private Integer numeroQuestoes;
 
 	public Long getIdProva() {
 		return idProva;
@@ -65,13 +75,37 @@ public class Prova {
 	public void setCorrigida(Integer corrigida) {
 		this.corrigida = corrigida;
 	}
+	
+	public Long getIdTag() {
+		return idTag;
+	}
 
-	public Set<QuestaoHistorico> getQuestoes() {
+	public void setIdTag(Long idTag) {
+		this.idTag = idTag;
+	}
+
+	public List<QuestaoHistorico> getQuestoes() {
 		return questoes;
 	}
 
-	public void setQuestoes(Set<QuestaoHistorico> questoes) {
+	public void setQuestoes(List<QuestaoHistorico> questoes) {
 		this.questoes = questoes;
 	}
 
+	public Integer getNumeroQuestoes() {
+		return numeroQuestoes;
+	}
+
+	public void setNumeroQuestoes(Integer numeroQuestoes) {
+		this.numeroQuestoes = numeroQuestoes;
+	}
+
+	public Double getNota() {
+		return nota;
+	}
+
+	public void setNota(Double nota) {
+		this.nota = nota;
+	}
+	
 }

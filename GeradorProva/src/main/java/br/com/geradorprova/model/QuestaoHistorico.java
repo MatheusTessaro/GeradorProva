@@ -1,5 +1,8 @@
 package br.com.geradorprova.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.geradorprova.model.enumeration.Dificuldade;
@@ -21,25 +26,36 @@ public class QuestaoHistorico {
 	@Column(name = "id_questao_historico")
 	private Long idQuestaoHistorico;
 	
-	
-	@Column(length = 100)
+	@Column
 	private String enunciado;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_questao")
 	private TipoQuestao tipoQuestao;
 	
+	@Enumerated(EnumType.STRING)
 	@Column
 	private Dificuldade dificuldade;
 
-	@Column
-	private String tag;
-	
-	@Column(name = "id_questao")
-	private Long idQuestao;
-	
 	@Column(name = "id_prova")
 	private Long idProva;
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "id_questao_historico")
+	private List<RespostaHistorico> respostas;
+	
+	@Column
+	private Double valor;
+	
+	@Column
+	private Double nota;
+	
+	
+	public QuestaoHistorico parseQuestaoToHistorico() {
+		
+		return null;
+	}
+	
 
 	public Long getIdQuestaoHistorico() {
 		return idQuestaoHistorico;
@@ -73,12 +89,40 @@ public class QuestaoHistorico {
 		this.dificuldade = dificuldade;
 	}
 
-	public String getTag() {
-		return tag;
+	public Long getIdProva() {
+		return idProva;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setIdProva(Long idProva) {
+		this.idProva = idProva;
+	}
+
+	public List<RespostaHistorico> getRespostas() {
+		return respostas;
+	}
+
+	public void setRespostas(List<RespostaHistorico> respostas) {
+		this.respostas = respostas;
 	}
 	
+	public Double getValor() {
+		return valor;
+	}
+
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+
+	public Double getNota() {
+		return nota;
+	}
+
+
+	public void setNota(Double nota) {
+		this.nota = nota;
+	}
+	
+
 }

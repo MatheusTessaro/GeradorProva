@@ -26,7 +26,7 @@ public class RespostaHistorico {
 	private Integer selecionado;
 
 	@Column(name = "id_questao_historico")
-	private Long idQuestao;
+	private Long idQuestaoHistorico;
 
 	public Long getIdRespostaHistorico() {
 		return idRespostaHistorico;
@@ -60,13 +60,13 @@ public class RespostaHistorico {
 		this.selecionado = selecionado;
 	}
 
-	public Long getIdQuestao() {
-		return idQuestao;
+	public Long getIdQuestaoHistorico() {
+		return idQuestaoHistorico;
 	}
 
-	public void setIdQuestao(Long idQuestao) {
-		this.idQuestao = idQuestao;
+	public void setIdQuestaoHistorico(Long idQuestaoHistorico) {
+		this.idQuestaoHistorico = idQuestaoHistorico;
 	}
-	
+
 	
 }

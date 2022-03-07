@@ -1,6 +1,6 @@
 package br.com.geradorprova.model;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,11 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.springframework.beans.factory.annotation.Lookup;
 
 import br.com.geradorprova.model.enumeration.Dificuldade;
 import br.com.geradorprova.model.enumeration.TipoQuestao;
@@ -29,7 +27,7 @@ public class Questao {
 	@Column(name = "id_questao")
 	private Long idQuestao;
 	
-	@Column(length = 100)
+	@Column
 	private String enunciado;
 
 	@Enumerated(EnumType.STRING)
@@ -43,16 +41,13 @@ public class Questao {
 	@Column(name = "id_tag")
 	private Long idTag;
 	
-//	@JoinColumn(name = "id_tag")
-//	private String tag;
+	@ManyToOne
+	@JoinColumn(name = "id_tag", insertable = false, updatable = false)
+	private Tag tag;
 	
-	@Transient
-	private String _tag;
-	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_questao")
-	private Set<Resposta> respostas;
-	
+	private List<Resposta> respostas;
 	
 	public Long getIdQuestao() {
 		return idQuestao;
@@ -94,27 +89,19 @@ public class Questao {
 		this.idTag = idTag;
 	}
 
-//	public String getTag() {
-//		return tag;
-//	}
-//
-//	public void setTag(String tag) {
-//		this.tag = tag;
-//	}
+	public Tag getTag() {
+		return tag;
+	}
+
+	public void setTag(Tag tag) {
+		this.tag = tag;
+	}
 	
-	public String get_tag() {
-		return _tag;
-	}
-
-	public void set_tag(String _tag) {
-		this._tag = _tag;
-	}
-
-	public Set<Resposta> getRespostas() {
+	public List<Resposta> getRespostas() {
 		return respostas;
 	}
 
-	public void setRespostas(Set<Resposta> respostas) {
+	public void setRespostas(List<Resposta> respostas) {
 		this.respostas = respostas;
 	}
 	

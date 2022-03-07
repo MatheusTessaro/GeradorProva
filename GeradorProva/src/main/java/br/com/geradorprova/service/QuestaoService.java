@@ -1,18 +1,13 @@
 package br.com.geradorprova.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.geradorprova.model.Questao;
-import br.com.geradorprova.model.Resposta;
 import br.com.geradorprova.model.Tag;
-import br.com.geradorprova.model.enumeration.TipoQuestao;
 import br.com.geradorprova.repository.QuestaoRepository;
 import br.com.geradorprova.repository.RespostaRepository;
 import br.com.geradorprova.repository.TagRepository;
@@ -33,16 +28,16 @@ public class QuestaoService {
 		
 		daoQuestao.save(questao);
 		
-		if(questao.getTipoQuestao().equals(TipoQuestao.ABERTA)) {
-			return;
-		}
-		
-		Set<Resposta> respostas = questao.getRespostas();
-		if(respostas != null && !respostas.isEmpty())
-		
-		for(Resposta resp : questao.getRespostas()) {
-			daoResposta.save(resp);
-		}
+//		if(questao.getTipoQuestao().equals(TipoQuestao.ABERTA)) {
+//			return;
+//		}
+//		
+//		Set<Resposta> respostas = questao.getRespostas();
+//		if(respostas != null && !respostas.isEmpty())
+//		
+//		for(Resposta resp : questao.getRespostas()) {
+//			daoResposta.save(resp);
+//		}
 		
 	}
 	
@@ -52,13 +47,15 @@ public class QuestaoService {
 		
 		questoes = daoQuestao.findAll();
 		
-		for(Questao questao : questoes) {
-			Tag tag = new Tag();
-			tag = daoTag.findById(questao.getIdTag()).get();
-			questao.set_tag(tag.getNome());
-		}
-		
 		return questoes;
+	}
+	
+	public Questao findById(Long id) {
+		Questao questao = new Questao();
+		
+		questao = daoQuestao.findById(id).get();
+		
+		return questao;
 	}
 	
 	public void delete(Long id) {

@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -27,10 +25,6 @@ public class Resposta {
 	@Column(name = "id_questao")
 	private Long idQuestao;
 	
-	@ManyToOne
-	@JoinColumn
-	private Questao questao;
-
 	public Long getIdResposta() {
 		return idResposta;
 	}

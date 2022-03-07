@@ -36,11 +36,16 @@
 	
 					<div class="col-6">
 						<label class="form-label" for="dificuldade">Grau de Dificuldade</label>
-						<input type="hidden">
-						<select name="" id="" class="form-control select2-single">
-							<option value="facil">Fácil</option>
-  							<option value="medio" selected>Médio</option>
-  							<option value="dificil">Difícil</option>
+<!-- 						<select name="" id="" class="form-control select2-single"> -->
+<!-- 							<option value="facil">Fácil</option> -->
+<!--   							<option value="medio" selected>Médio</option> -->
+<!--   							<option value="dificil">Difícil</option> -->
+<!-- 						</select> -->
+						<select id="idDificuldade" name="dificuldade" th:field="*{dificuldade}" class="form-control select2-single">
+						    <option th:each="dif : ${T(br.com.geradorprova.model.enumeration.Dificuldade).values()}"
+						            th:value="${dif}"
+						            th:text="${dif.valor}">
+						    </option>
 						</select>
 					</div>
 				</div>
@@ -48,11 +53,16 @@
 				<div class="row">
 					<div class="col-6">
 						<label class="form-label" for="tipo">Tipo de Questão</label>
-						<input type="hidden">
-						<select name="" id=""  class="form-control select2-single">
-							<option value="0">Aberta</option>
-  							<option value="1" selected>Multipla</option>
-  							<option value="2">Única</option>
+<!-- 						<select name="" id=""  class="form-control select2-single"> -->
+<!-- 							<option value="0">Aberta</option> -->
+<!--   							<option value="1" selected>Multipla</option> -->
+<!--   							<option value="2">Única</option> -->
+<!-- 						</select> -->
+						<select id="idtipoQuestao" name="tipoQuestao" th:field="*{tipoQuestao}" class="form-control select2-single">
+						    <option th:each="tipo : ${T(br.com.geradorprova.model.enumeration.TipoQuestao).values()}"
+						            th:value="${tipo}"
+						            th:text="${tipo.valor}">
+						    </option>
 						</select>
 					</div>
 				</div>
@@ -63,16 +73,16 @@
 						th:case="${0}"
 					-->
 
-					<div >
-						<div class="row">
-							<div class="col-12">
-								<label class="form-label" for="aberta">Enunciado:</label>
-								<textarea class="form-control" id="" name="aberta" placeholder="Enunciado da questão"
-								rows="3" cols="40">
-								</textarea>
-						</div>
-						</div>
-					</div>
+<!-- 					<div > -->
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-12"> -->
+<!-- 								<label class="form-label" for="aberta">Enunciado:</label> -->
+<!-- 								<textarea class="form-control" id="" name="aberta" placeholder="Enunciado da questão" -->
+<!-- 								rows="3" cols="40"> -->
+<!-- 								</textarea> -->
+<!-- 						</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 
 
 					<!-- 
@@ -84,7 +94,7 @@
 						<div class="row">
 							<div class="col-12">
 									<label class="form-label" for="aberta">Enunciado:</label>
-									<textarea class="form-control" id="" name="aberta" placeholder="Enunciado da questão"
+									<textarea th:field="*{enunciado}" class="form-control" id="" name="aberta" placeholder="Enunciado da questão"
 									rows="3" cols="40">
 									</textarea>
 							</div>
@@ -92,14 +102,14 @@
 		
 						<div class="row">
 							<div class="col-1 center mt-2">
-								<input class="form-label" type="checkbox" name="opcaoM" value="opm1" style="height: 20px; width: 20px;">	
+								<input class="form-label" type="checkbox" th:field="*{respostas[0].respostaCorreta}" name="opcaoM" style="height: 20px; width: 20px;">	
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{enunciado}" class="form-control"
+									type="text" th:field="*{respostas[0].resposta}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('*{respostas[0].resposta}')}"
+									th:errors="*{respostas[0].resposta}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -107,10 +117,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{enunciado}" class="form-control"
+									type="text" th:field="*{respostas[1].resposta}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('*{respostas[1].resposta}')}"
+									th:errors="*{respostas[1].resposta}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -118,10 +128,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{enunciado}" class="form-control"
+									type="text" th:field="*{respostas[2].resposta}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('*{respostas[2].resposta}')}"
+									th:errors="*{respostas[2].resposta}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -129,10 +139,10 @@
 							</div>
 							<div class="col-11 mb-3">
 								<input
-									type="text" th:field="*{enunciado}" class="form-control"
+									type="text" th:field="*{respostas[3].resposta}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('*{respostas[3].resposta}')}"
+									th:errors="*{respostas[3].resposta}">campo invalido</span>
 							</div>
 		
 							<div class="col-1 center mt-2">
@@ -140,10 +150,10 @@
 							</div>
 							<div class="col-11">
 								<input
-									type="text" th:field="*{enunciado}" class="form-control"
+									type="text" th:field="*{respostas[4].resposta}" class="form-control"
 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
+								<span class="error" th:if="${#fields.hasErrors('*{respostas[4].resposta}')}"
+									th:errors="*{respostas[4].resposta}">campo invalido</span>
 							</div>
 						</div>
 					</div>
@@ -155,71 +165,71 @@
 					-->
 
 					<div >
-						<div class="row">
-							<div class="col-12">
-									<label class="form-label" for="aberta">Enunciado:</label>
-									<textarea class="form-control" id="" name="aberta" placeholder="Enunciado da questão"
-									rows="3" cols="40">
-									</textarea>
-							</div>
-						</div>
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-12"> -->
+<!-- 									<label class="form-label" for="aberta">Enunciado:</label> -->
+<!-- 									<textarea class="form-control" id="" name="aberta" placeholder="Enunciado da questão" -->
+<!-- 									rows="3" cols="40"> -->
+<!-- 									</textarea> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 		
-						<div class="row">
-							<div class="col-1 center mt-2">
-								<input class="form-label" type="RADIO" name="opcao" value="op1" style="height: 20px; width: 20px;">	
-							</div>
-							<div class="col-11 mb-3">
-								<input
-									type="text" th:field="*{enunciado}" class="form-control"
-									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
-							</div>
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col-1 center mt-2"> -->
+<!-- 								<input class="form-label" type="RADIO" name="opcao" value="op1" style="height: 20px; width: 20px;">	 -->
+<!-- 							</div> -->
+<!-- 							<div class="col-11 mb-3"> -->
+<!-- 								<input -->
+<!-- 									type="text" th:field="*{enunciado}" class="form-control" -->
+<!-- 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off"> -->
+<!-- 								<span class="error" th:if="${#fields.hasErrors('enunciado')}" -->
+<!-- 									th:errors="*{enunciado}">campo invalido</span> -->
+<!-- 							</div> -->
 		
-							<div class="col-1 center mt-2">
-								<input class="form-label" type="RADIO" name="opcao" value="op2" style="height: 20px; width: 20px;">	
-							</div>
-							<div class="col-11 mb-3">
-								<input
-									type="text" th:field="*{enunciado}" class="form-control"
-									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
-							</div>
+<!-- 							<div class="col-1 center mt-2"> -->
+<!-- 								<input class="form-label" type="RADIO" name="opcao" value="op2" style="height: 20px; width: 20px;">	 -->
+<!-- 							</div> -->
+<!-- 							<div class="col-11 mb-3"> -->
+<!-- 								<input -->
+<!-- 									type="text" th:field="*{enunciado}" class="form-control" -->
+<!-- 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off"> -->
+<!-- 								<span class="error" th:if="${#fields.hasErrors('enunciado')}" -->
+<!-- 									th:errors="*{enunciado}">campo invalido</span> -->
+<!-- 							</div> -->
 		
-							<div class="col-1 center mt-2">
-								<input class="form-label" type="RADIO" name="opcao" value="op3" style="height: 20px; width: 20px;">	
-							</div>
-							<div class="col-11 mb-3">
-								<input
-									type="text" th:field="*{enunciado}" class="form-control"
-									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
-							</div>
+<!-- 							<div class="col-1 center mt-2"> -->
+<!-- 								<input class="form-label" type="RADIO" name="opcao" value="op3" style="height: 20px; width: 20px;">	 -->
+<!-- 							</div> -->
+<!-- 							<div class="col-11 mb-3"> -->
+<!-- 								<input -->
+<!-- 									type="text" th:field="*{enunciado}" class="form-control" -->
+<!-- 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off"> -->
+<!-- 								<span class="error" th:if="${#fields.hasErrors('enunciado')}" -->
+<!-- 									th:errors="*{enunciado}">campo invalido</span> -->
+<!-- 							</div> -->
 		
-							<div class="col-1 center mt-2">
-								<input class="form-label" type="RADIO" name="opcao" value="op4" style="height: 20px; width: 20px;">	
-							</div>
-							<div class="col-11 mb-3">
-								<input
-									type="text" th:field="*{enunciado}" class="form-control"
-									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
-							</div>
+<!-- 							<div class="col-1 center mt-2"> -->
+<!-- 								<input class="form-label" type="RADIO" name="opcao" value="op4" style="height: 20px; width: 20px;">	 -->
+<!-- 							</div> -->
+<!-- 							<div class="col-11 mb-3"> -->
+<!-- 								<input -->
+<!-- 									type="text" th:field="*{enunciado}" class="form-control" -->
+<!-- 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off"> -->
+<!-- 								<span class="error" th:if="${#fields.hasErrors('enunciado')}" -->
+<!-- 									th:errors="*{enunciado}">campo invalido</span> -->
+<!-- 							</div> -->
 		
-							<div class="col-1 center mt-2">
-								<input class="form-label" type="RADIO" name="opcao" value="op5" style="height: 20px; width: 20px;">	
-							</div>
-							<div class="col-11">
-								<input
-									type="text" th:field="*{enunciado}" class="form-control"
-									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
-								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
-									th:errors="*{enunciado}">campo invalido</span>
-							</div>
-						</div>
+<!-- 							<div class="col-1 center mt-2"> -->
+<!-- 								<input class="form-label" type="RADIO" name="opcao" value="op5" style="height: 20px; width: 20px;">	 -->
+<!-- 							</div> -->
+<!-- 							<div class="col-11"> -->
+<!-- 								<input -->
+<!-- 									type="text" th:field="*{enunciado}" class="form-control" -->
+<!-- 									placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off"> -->
+<!-- 								<span class="error" th:if="${#fields.hasErrors('enunciado')}" -->
+<!-- 									th:errors="*{enunciado}">campo invalido</span> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 		
 		
 						<div class="mb-3">
