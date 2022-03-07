@@ -39,7 +39,7 @@
 						<tr th:each="prova: ${provaList}">
 							<td class="center" th:text="${prova.idProva}" />
 							<td th:text="${prova.titulo}" />
-<!-- 							<td th:text="${{prova.lancamento}}" /> -->
+<!-- 							<td th:text="${{prova.status}}" /> -->
 							<td th:text="${{prova.nota}}" />
 							<td class="center"><a th:href="@{/prova/deletar/{id}(id=${prova.idProva})}">
 									<i class="bi bi-trash" title="delete"></i>
