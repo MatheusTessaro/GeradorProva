@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="head :: head"></head>
+	
+	<body>
+		<!-- 
+	    BARRA DE NAVEGACAO 
+	  -->
+	
+		<div th:replace="menu :: menu"></div>
+	
+		<!-- 
+	    CONTEUDO DA PAGINA 
+	  -->
+		<main class="container">
+			<div class="bg-light p-5 rounded">
+				<h1>Gerar Prova</h1>
+	
+				<p>Atualizacao</p>
+	
+				<form th:object="${prova}" action="/prova/salvar" method="POST">
+	
+					<div>
+						<label class="form-label" for="nome">Titulo</label> <input type="text" th:field="*{titulo}"
+							class="form-control" placeholder="Enunciado da Prova" th:errorclass="inputError"
+							autocomplete="off"> <span class="error" th:if="${#fields.hasErrors('titulo')}"
+							th:errors="*{nome}">campo
+							invalido</span>
+					</div>
+				</form>
+			</div>
+		</main>
+		<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>
