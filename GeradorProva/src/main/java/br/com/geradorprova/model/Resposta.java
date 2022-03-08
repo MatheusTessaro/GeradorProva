@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_resposta")
@@ -24,6 +25,9 @@ public class Resposta {
 
 	@Column(name = "id_questao")
 	private Long idQuestao;
+	
+	@Transient
+	private boolean isCorrect = true;
 	
 	public Long getIdResposta() {
 		return idResposta;
@@ -57,5 +61,13 @@ public class Resposta {
 	public void setIdQuestao(Long idQuestao) {
 		this.idQuestao = idQuestao;
 	}
-	
+
+	public boolean isCorrect() {
+		return isCorrect;
+	}
+
+	public void setCorrect(boolean isCorrect) {
+		this.isCorrect = isCorrect;
+	}
+
 }

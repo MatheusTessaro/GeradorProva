@@ -43,11 +43,8 @@ public class ProvaService {
 	
 	
 	public List<Prova> listAll() {
-		List<Prova> provas = new ArrayList<>();
-		provas = daoProva.findAll();
 		
-		
-		return provas;
+		return daoProva.findAll();
 	}
 	
 
@@ -60,7 +57,6 @@ public class ProvaService {
 	public void delete(Long id) {
 		
 		daoProva.deleteById(id);
-		
 	}
 	
 	
@@ -70,9 +66,8 @@ public class ProvaService {
 		Prova prova = daoProva.findById(id).get();
 		
 		for(QuestaoHistorico q : prova.getQuestoes()) {
-			if(q.getTipoQuestao().equals(TipoQuestao.ABERTA)) {
-				continue;
-			}else if(q.getTipoQuestao().equals(TipoQuestao.ESCOLHA_UNICA)) {
+			
+			if(q.getTipoQuestao().equals(TipoQuestao.ESCOLHA_UNICA)) {
 				q.setNota(verifyEscolhaUnica(q));
 			}else if(q.getTipoQuestao().equals(TipoQuestao.ESCOLHA_MULTIPLA)) {
 				q.setNota(verifyEscolhaMultipla(q));
@@ -90,8 +85,6 @@ public class ProvaService {
 			if(resp.getRespostaCorreta() == 1 && resp.getSelecionado() == 1) {
 				nota = questao.getValor();
 				break;
-			}else {
-				continue;
 			}
 		}
 		
@@ -128,7 +121,7 @@ public class ProvaService {
 			qH.setEnunciado(q.getEnunciado());
 			qH.setTipoQuestao(q.getTipoQuestao());
 			qH.setDificuldade(q.getDificuldade());
-			qH.setValor((double) (100 / qtdeQuestoes));
+			qH.setValor((100D / qtdeQuestoes));
 			qH.setRespostas(parseRespostaToHistorico(q.getRespostas()));
 		}
 		

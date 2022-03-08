@@ -29,7 +29,7 @@
 						<tr>
 							<th style="width: 50px">ID</th>
 							<th>Título da Prova</th>
-							<th style="width: 150px">Status Prova</th>
+							<th style="width: 150px">Status</th>
 							<th style="width: 50px">Nota</th>
 							<th style="width: 50px">Deletar</th>
 						</tr>
@@ -39,7 +39,17 @@
 						<tr th:each="prova: ${provaList}">
 							<td class="center" th:text="${prova.idProva}" />
 							<td th:text="${prova.titulo}" />
-<!-- 							<td th:text="${{prova.status}}" /> -->
+							<td th:switch="${prova.status}">
+								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).FINALIZADA}">
+									Finalizado
+								</div>
+								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).CORRIGIDA}">
+									Corrigido
+								</div>
+								<div th:case="*">
+									...
+								</div>
+							</td>
 							<td th:text="${{prova.nota}}" />
 							<td class="center"><a th:href="@{/prova/deletar/{id}(id=${prova.idProva})}">
 									<i class="bi bi-trash" title="delete"></i>

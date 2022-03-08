@@ -31,7 +31,6 @@
 							<th style="width: 50px">ID</th>
 							<th>Tag</th>
 							<th style="width: 50px">Editar</th>
-							<th style="width: 50px">Deletar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -41,11 +40,6 @@
 							<td>
 								<a th:href="@{/tag/editar/{id}(id=${tag.idTag})}"> <i
 										class=" bi bi-pencil-square" title="editar"></i>
-								</a>
-							</td>
-							<td>
-								<a th:href="@{/tag/deletar/{id}(id=${tag.idTag})}"> <i class="bi bi-trash"
-										title="deletar"></i>
 								</a>
 							</td>
 						</tr>

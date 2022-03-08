@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import br.com.geradorprova.model.enumeration.ProvaStatus;
 
 @Entity
 @Table(name = "tb_prova")
@@ -25,11 +29,15 @@ public class Prova {
 	@Column
 	private String titulo;
 	
+//	@Column
+//	private Integer finalizada;
+//
+//	@Column
+//	private Integer corrigida;
+	
 	@Column
-	private Integer finalizada;
-
-	@Column
-	private Integer corrigida;
+	@Enumerated(EnumType.STRING)
+	private ProvaStatus status;
 	
 	@Transient
 	private Long idTag;
@@ -60,24 +68,32 @@ public class Prova {
 		this.titulo = titulo;
 	}
 
-	public Integer getFinalizada() {
-		return finalizada;
-	}
-
-	public void setFinalizada(Integer finalizada) {
-		this.finalizada = finalizada;
-	}
-
-	public Integer getCorrigida() {
-		return corrigida;
-	}
-
-	public void setCorrigida(Integer corrigida) {
-		this.corrigida = corrigida;
-	}
+//	public Integer getFinalizada() {
+//		return finalizada;
+//	}
+//
+//	public void setFinalizada(Integer finalizada) {
+//		this.finalizada = finalizada;
+//	}
+//
+//	public Integer getCorrigida() {
+//		return corrigida;
+//	}
+//
+//	public void setCorrigida(Integer corrigida) {
+//		this.corrigida = corrigida;
+//	}
 	
 	public Long getIdTag() {
 		return idTag;
+	}
+
+	public ProvaStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ProvaStatus status) {
+		this.status = status;
 	}
 
 	public void setIdTag(Long idTag) {

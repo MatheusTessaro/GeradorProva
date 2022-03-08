@@ -89,8 +89,32 @@
 						MULTIPLA ESCOLHA 
 						th:case="${1}"
 					-->
+					
+<!-- 					<div th:each="r : ${questao.respostas}"> -->
+<!-- 						<div> -->
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col-12"> -->
+<!-- 									<label class="form-label" for="multipla">Enunciado:</label> -->
+<!-- 									<textarea th:field="*{enunciado}" class="form-control" name="multipla" placeholder="Enunciado da questão" rows="3" cols="40"></textarea> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+							
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col-1 center mt-2"> -->
+<!-- 									<input class="form-label" type="checkbox" th:checked="${r.respostaCorreta} == 1"> -->
+<!-- 								</div> -->
+<!-- 								<div class="col-11 mb-3"> -->
+<!-- 									<input -->
+<!-- 										type="text" th:field="${r.resposta}" class="form-control" -->
+<!-- 										placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off"> -->
+<!-- 									<span class="error" th:if="${#fields.hasErrors('${r.resposta}')}">campo invalido</span> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+							
+<!-- 						</div> -->
+<!-- 					</div> -->
 
-					<div>
+					 <div>
 						<div class="row">
 							<div class="col-12">
 									<label class="form-label" for="aberta">Enunciado:</label>
@@ -102,7 +126,9 @@
 		
 						<div class="row">
 							<div class="col-1 center mt-2">
-								<input class="form-label" type="checkbox" th:field="*{respostas[0].respostaCorreta}" name="opcaoM" style="height: 20px; width: 20px;">	
+								<input 
+								class="form-label" type="checkbox" th:checked="*{not #lists.isEmpty(respostas) && respostas[0].respostaCorreta == 1}"  
+								name="opcaoM" style="height: 20px; width: 20px;">	
 							</div>
 							<div class="col-11 mb-3">
 								<input

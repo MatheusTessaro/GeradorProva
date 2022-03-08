@@ -1,6 +1,5 @@
 package br.com.geradorprova.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +31,8 @@ public class TagService {
 
 	
 	public List<Tag> list() {
-		List<Tag> tags = new ArrayList<>();
 		
-		tags = daoTag.findAll();
-		
-		return tags;
+		return daoTag.findAll();
 	}
 	
 	public Tag findById(Long id) {
