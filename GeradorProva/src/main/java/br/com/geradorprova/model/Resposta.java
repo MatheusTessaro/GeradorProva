@@ -5,8 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_resposta")
@@ -21,13 +22,12 @@ public class Resposta {
 	private String resposta;
 	
 	@Column(name = "resposta_correta")
-	private Integer respostaCorreta;
+	private Integer respostaCorreta = 0;
 
 	@Column(name = "id_questao")
 	private Long idQuestao;
 	
-	@Transient
-	private boolean isCorrect = true;
+	private Boolean checked;
 	
 	public Long getIdResposta() {
 		return idResposta;
@@ -62,12 +62,21 @@ public class Resposta {
 		this.idQuestao = idQuestao;
 	}
 
-	public boolean isCorrect() {
-		return isCorrect;
+	public Boolean isCorrect() {
+		return checked;
 	}
 
-	public void setCorrect(boolean isCorrect) {
-		this.isCorrect = isCorrect;
+	public void setCorrect(Boolean isCorrect) {
+		this.checked = isCorrect;
+	}
+	
+	@PrePersist
+	@PreUpdate
+	public void parseBoolean() {
+		if(this.checked)
+			this.respostaCorreta = 1;
+		else
+			this.respostaCorreta = 0;
 	}
 
 }

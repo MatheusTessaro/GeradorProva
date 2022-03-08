@@ -41,10 +41,10 @@
 							<td th:text="${prova.titulo}" />
 							<td th:switch="${prova.status}">
 								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).FINALIZADA}">
-									Finalizado
+									Finalizada
 								</div>
 								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).CORRIGIDA}">
-									Corrigido
+									Corrigida
 								</div>
 								<div th:case="*">
 									...

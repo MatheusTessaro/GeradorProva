@@ -27,16 +27,14 @@ public class ProvaController {
 		Prova prova = new Prova();
 		model.addAttribute(prova);
 		
-//		return "prova/form.html";
-		return "index.html";
+		return "prova/form.html";
 	}
 	
 	@PostMapping("/salvar")
 	public String save(@Valid Prova prova) {
 		
 		
-//		return "redirect:/prova/listar";
-		return "index.html";
+		return "redirect:/prova/listar";
 	}
 
 	@GetMapping("/deletar/{id}")
@@ -44,8 +42,7 @@ public class ProvaController {
 		
 		provaService.delete(id);
 		
-//		return "redirect:/prova/listar";
-		return "index.html";
+		return "redirect:/prova/listar";
 	}
 
 	@GetMapping("/realizar/{id}")
@@ -54,8 +51,7 @@ public class ProvaController {
 		
 		model.addAttribute("prova", prova);
 		
-//		return "prova/formExecProva.html";
-		return "index.html";
+		return "prova/realizar.html";
 	}
 
 	@GetMapping("/listar")
@@ -64,7 +60,6 @@ public class ProvaController {
 		model.addAttribute("provaList", provas);
 		
 		return "prova/listar";
-//		return "index.html";
 	}
 	
 	@GetMapping("/corrigir/{id}")
@@ -73,8 +68,7 @@ public class ProvaController {
 		prova = provaService.autoRectify(id);
 		model.addAttribute("prova", prova);
 		
-//		return "prova/rectify.html";
-		return "index.html";
+		return "prova/corrigir.html";
 	}
 	
 }
