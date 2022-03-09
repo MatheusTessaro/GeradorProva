@@ -22,12 +22,11 @@
 				<form th:object="${prova}" action="/prova/salvar" method="POST">
 	
 					<div>
-						<label class="form-label" for="titulo">Titulo</label> 
-						<input type="text" th:field="*{titulo}"
-							class="form-control" placeholder="Enunciado da Prova" 
-							th:errorclass="inputError"autocomplete="off"> 
-							<span class="error" th:if="${#fields.hasErrors('titulo')}"
-							th:errors="*{titulo}">campo invalido</span>
+						<label class="form-label" for="nome">Titulo</label> <input type="text" th:field="*{titulo}"
+							class="form-control" placeholder="Enunciado da Prova" th:errorclass="inputError"
+							autocomplete="off"> <span class="error" th:if="${#fields.hasErrors('titulo')}"
+							th:errors="*{nome}">campo
+							invalido</span>
 					</div>
 				</form>
 			</div>

@@ -1,8 +1,6 @@
 package br.com.geradorprova.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import javax.validation.Valid;
 
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.geradorprova.model.Questao;
-import br.com.geradorprova.model.Resposta;
 import br.com.geradorprova.service.QuestaoService;
 
 @Controller

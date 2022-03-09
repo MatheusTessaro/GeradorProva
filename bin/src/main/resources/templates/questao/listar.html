@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="head :: head"></head>
+
+<body>
+	<!-- 
+    BARRA DE NAVEGACAO 
+  -->
+	<div th:replace="menu :: menu"></div>
+
+	<!-- 
+    CONTEUDO DA PAGINA 
+  -->
+	<main class="container">
+		<a class="btn btn-c btn-secondary active my-3" role="button"
+			th:href="@{/questao/novo}"> <i class="bi bi-plus-square"></i>
+			Questão
+		</a>
+
+		<div class="bg-light p-5 rounded">
+			<div class="row">
+			
+				<h2>Questões</h2>
+				<table class="table table-striped table-bordered table-hover mt-4 mb-5 center">
+					<thead>
+						<tr>
+							<th style= "width: 50px">ID</th>
+							<th>Enunciado</th>
+							<th>Tag</th>
+							<th style= "width: 50px">Dificuldade</th>
+							<th style= "width: 50px">Editar</th>
+							<th style= "width: 50px">Deletar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="q: ${questaoList}">
+							<td th:text="${q.idQuestao}" />
+							<td th:text="${q.enunciado}" />
+							<td th:text="${q.tag.nome}" />
+							<td th:text="${q.dificuldade}" />
+							<td>
+								<a th:href="@{/questao/editar/{id}(id=${q.idQuestao})}"> <i class="bi bi-pencil-square"
+										title="editar"></i>
+								</a>
+							</td>
+							<td>
+								<a th:href="@{/questao/deletar/{id}(id=${q.idQuestao})}"> <i class="bi bi-trash"
+										title="delete"></i>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+
+		</div>
+	</main>
+	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

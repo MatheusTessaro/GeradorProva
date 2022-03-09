@@ -64,8 +64,7 @@ public class ProvaController {
 	
 	@GetMapping("/corrigir/{id}")
 	public String rectify(@PathVariable Long id, Model model) {
-		Prova prova = new Prova();
-		prova = provaService.autoRectify(id);
+		Prova prova = provaService.autoRectify(id);
 		model.addAttribute("prova", prova);
 		
 		return "prova/corrigir.html";
