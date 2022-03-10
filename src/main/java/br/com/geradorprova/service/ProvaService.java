@@ -12,9 +12,11 @@ import br.com.geradorprova.model.Questao;
 import br.com.geradorprova.model.QuestaoHistorico;
 import br.com.geradorprova.model.Resposta;
 import br.com.geradorprova.model.RespostaHistorico;
+import br.com.geradorprova.model.Tag;
 import br.com.geradorprova.model.enumeration.TipoQuestao;
 import br.com.geradorprova.repository.ProvaRepository;
 import br.com.geradorprova.repository.QuestaoRepository;
+import br.com.geradorprova.repository.TagRepository;
 
 @Service
 public class ProvaService {
@@ -25,12 +27,17 @@ public class ProvaService {
 	@Autowired
 	QuestaoRepository daoQuestao;
 	
+	@Autowired
+	TagRepository daoTag;
+	
 	public void generate(Prova prova) {
 		//se for possivel update tem que fazer um if verificando se idProva == null.
 		
 		List<QuestaoHistorico> questoesProva = new ArrayList<>();
 		
 		List<Questao> questoes = daoQuestao.findByIdTag(prova.getIdTag());
+		prova.setTag(questoes.get(0).getTag().getNome());
+		
 		Collections.shuffle(questoes);
 		questoesProva.addAll(parseQuestaoToHistorico(questoes.subList(0, prova.getNumeroQuestoes())));
 		
@@ -139,6 +146,11 @@ public class ProvaService {
 		}
 		
 		return respostaHistorico;
+	}
+	
+	public List<Tag> findAllTags() {
+		
+		return daoTag.findAll();
 	}
 	
 }

@@ -26,6 +26,7 @@ public class ProvaController {
 	public String formNew(Model model) {
 		Prova prova = new Prova();
 		model.addAttribute(prova);
+		model.addAttribute("tagList", provaService.findAllTags());
 		
 		return "prova/form.html";
 	}
@@ -33,6 +34,7 @@ public class ProvaController {
 	@PostMapping("/salvar")
 	public String save(@Valid Prova prova) {
 		
+		provaService.generate(prova);
 		
 		return "redirect:/prova/listar";
 	}

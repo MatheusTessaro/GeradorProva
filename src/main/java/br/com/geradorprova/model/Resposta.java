@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "tb_resposta")
@@ -27,6 +28,7 @@ public class Resposta {
 	@Column(name = "id_questao")
 	private Long idQuestao;
 	
+	@Transient
 	private Boolean checked;
 	
 	public Long getIdResposta() {
@@ -70,13 +72,13 @@ public class Resposta {
 		this.checked = isCorrect;
 	}
 	
-	@PrePersist
-	@PreUpdate
-	public void parseBoolean() {
-		if(this.checked)
-			this.respostaCorreta = 1;
-		else
-			this.respostaCorreta = 0;
-	}
+//	@PrePersist
+//	@PreUpdate
+//	public void parseBoolean() {
+//		if(this.checked)
+//			this.respostaCorreta = 1;
+//		else
+//			this.respostaCorreta = 0;
+//	}
 
 }

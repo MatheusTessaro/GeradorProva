@@ -39,11 +39,14 @@ public class Prova {
 	@Enumerated(EnumType.STRING)
 	private ProvaStatus status;
 	
-	@Transient
-	private Long idTag;
+	@Column
+	private String tag;
 	
 	@Column
 	private Double nota;
+	
+	@Transient
+	private Long idTag;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_prova")
@@ -86,6 +89,14 @@ public class Prova {
 	
 	public Long getIdTag() {
 		return idTag;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	public ProvaStatus getStatus() {

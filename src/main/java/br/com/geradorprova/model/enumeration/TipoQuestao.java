@@ -6,12 +6,10 @@ public enum TipoQuestao {
 	ESCOLHA_MULTIPLA("Escolha multipla");
 	
 	private final String valor;
-	
 
 	private TipoQuestao(String valor) {
 		this.valor = valor;
 	}
-
 	
     public String getValor() {
         return valor;

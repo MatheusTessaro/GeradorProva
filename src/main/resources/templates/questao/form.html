@@ -27,7 +27,6 @@
 				<div class="row">
 					<div class="col-6">
 						<label class="form-label" for="tag">Tag</label>
-						<input type="hidden">
 						
 						<select th:field="*{idTag}" name="" id="" class="form-control select2-single">
 							<option th:each="tag : ${tagList}" th:value="${tag.idTag}" th:text="${tag.nome}">
@@ -81,7 +80,7 @@
 					-->
 					
 
-					 <div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA}">
+					 <div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA">
 						<div class="row">
 							<div class="col-12">
 									<label class="form-label" for="aberta">Enunciado:</label>
@@ -95,7 +94,7 @@
 							<div class="col-1 center mt-2">
 								<input 
 									class="form-label" type="checkbox" th:checked="*{not #lists.isEmpty(respostas) && respostas[0].respostaCorreta == 1}"  
-									name="opcaoM" style="height: 20px; width: 20px;">	
+									th:field="*{respostas[0].respostaCorreta}" th:value="${1}" name="opcaoM" style="height: 20px; width: 20px;">	
 							</div>
 							<div class="col-11 mb-3">
 								<input
@@ -164,7 +163,7 @@
 						th:case="${2}"
 					-->
 
-					<div >
+					<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}">
 						<div class="row">
 							<div class="col-12">
 									<label class="form-label" for="aberta">Enunciado:</label>
@@ -218,7 +217,7 @@
 								<span class="error" th:if="${#fields.hasErrors('enunciado')}"
 									th:errors="*{enunciado}">campo invalido</span>
 							</div>
-		
+							
 							<div class="col-1 center mt-2">
 								<input class="form-label" type="RADIO" name="opcao" value="op5" style="height: 20px; width: 20px;">	
 							</div>
@@ -230,19 +229,16 @@
 									th:errors="*{enunciado}">campo invalido</span>
 							</div>
 						</div>
-		
-		
-						<div class="mb-3">
-		
-							<p th:switch="${questao.idQuestao>0}">
-								<button th:case="${true}" type="submit"
-									class="btn-c btn btn-secondary active my-3">Atualizar</button>
-								<button th:case="*" type="submit"
-									class="btn-c btn btn-secondary active my-3">Adicionar</button>
-							</p>
-		
-						</div>
 					</div>
+				</div>
+				
+				<div class="mb-3">
+					<p th:switch="${questao.idQuestao>0}">
+						<button th:case="${true}" type="submit"
+							class="btn-c btn btn-secondary active my-3">Atualizar</button>
+						<button th:case="*" type="submit"
+							class="btn-c btn btn-secondary active my-3">Adicionar</button>
+					</p>
 				</div>
 
 			</form>
@@ -251,12 +247,21 @@
 	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
 	<script th:inline="javascript">
 		/*<![CDATA][*/
+// 			$(document).ready(function () {
+				
+// 				console.log($("#idtipoQuestao :selected").html());
 			
-// 			console.log($("#idtipoQuestao :selected").value);
+// 				$(".pickerMaster").click(function() {
+// 					var divid = $(this).closest("div.course").find("input[name='hiddenDiviceId']").val();
+// 					console.log(divid);
+// 					});
+				
+// 				$("#idTipoQuestao").change(function (){
+// 					console.log($("#idtipoQuestao :selected").html());
+// 				});
 			
-// 			$("#idTipoQuestao").change(function (){
-// 				console.log($("#idtipoQuestao :selected").value);
-// 			});
+// 			}
+			
 		
 		/*]]>*/	
 	</script>

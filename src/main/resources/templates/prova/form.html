@@ -29,6 +29,26 @@
 							<span class="error" th:if="${#fields.hasErrors('titulo')}"
 							th:errors="*{titulo}">campo invalido</span>
 					</div>
+					
+					<div class="row">
+						<div class="col-8">
+							<label class="form-label" for="tag">Tag</label>
+							
+							<select th:field="*{idTag}" class="form-control select2-single">
+								<option th:each="tag : ${tagList}" th:value="${tag.idTag}" th:text="${tag.nome}">
+							</select>
+						</div>
+		
+						<div class="col-4 mt-4">
+							<label class="form-label" for="qtdeQuestoes">Quantidade de questoes</label>
+							
+							<input name="qtdeQuestoes" type="number" min="0" th:field="*{numeroQuestoes}">
+						</div>
+					</div>
+					
+					<button type="submit"
+								class="btn-c btn btn-secondary active my-3">Atualizar</button>
+					
 				</form>
 			</div>
 		</main>

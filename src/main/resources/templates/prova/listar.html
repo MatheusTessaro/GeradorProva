@@ -29,6 +29,7 @@
 						<tr>
 							<th style="width: 50px">ID</th>
 							<th>Título da Prova</th>
+							<th>Tag</th>
 							<th style="width: 150px">Status</th>
 							<th style="width: 50px">Nota</th>
 							<th style="width: 50px">Deletar</th>
@@ -39,6 +40,7 @@
 						<tr th:each="prova: ${provaList}">
 							<td class="center" th:text="${prova.idProva}" />
 							<td th:text="${prova.titulo}" />
+							<td th:text="${prova.tag}" />
 							<td th:switch="${prova.status}">
 								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).FINALIZADA}">
 									Finalizada
