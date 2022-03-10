@@ -13,6 +13,7 @@ import br.com.geradorprova.model.QuestaoHistorico;
 import br.com.geradorprova.model.Resposta;
 import br.com.geradorprova.model.RespostaHistorico;
 import br.com.geradorprova.model.Tag;
+import br.com.geradorprova.model.enumeration.ProvaStatus;
 import br.com.geradorprova.model.enumeration.TipoQuestao;
 import br.com.geradorprova.repository.ProvaRepository;
 import br.com.geradorprova.repository.QuestaoRepository;
@@ -30,8 +31,22 @@ public class ProvaService {
 	@Autowired
 	TagRepository daoTag;
 	
+	
+	public void save(Prova prova) {
+		if(prova.getStatus().equals(ProvaStatus.FINALIZADA)) {
+			prova.setStatus(ProvaStatus.CORRIGIDA);
+			Double nota = 0.00;
+			for(QuestaoHistorico questao : prova.getQuestoes()) {
+				nota += questao.getNota();
+			}
+			prova.setNota(nota);
+		}
+		
+		daoProva.save(prova);
+	}
+	
+	
 	public void generate(Prova prova) {
-		//se for possivel update tem que fazer um if verificando se idProva == null.
 		
 		List<QuestaoHistorico> questoesProva = new ArrayList<>();
 		
