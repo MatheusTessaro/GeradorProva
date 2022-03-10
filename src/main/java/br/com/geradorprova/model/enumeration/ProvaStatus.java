@@ -2,6 +2,7 @@ package br.com.geradorprova.model.enumeration;
 
 public enum ProvaStatus {
 
+	ABERTA("Aberta"),
 	CORRIGIDA("Corrigida"),
 	FINALIZADA("Finalizada");
 	
