@@ -48,6 +48,7 @@
 					<div class="col-6">
 						<label class="form-label" for="tipo">Tipo de Questão</label>
 						<select id="idtipoQuestao" name="tipoQuestao" th:field="*{tipoQuestao}" class="form-control select2-single">
+							<option value="">Selecione uma opcao</option>
 						    <option th:each="tipo : ${T(br.com.geradorprova.model.enumeration.TipoQuestao).values()}"
 						            th:value="${tipo}"
 						            th:text="${tipo.valor}">
@@ -278,17 +279,11 @@
 			                else{
 			                    $("#ajaxLoadedContent").replaceWith(response);
 			                }
-			            }
+			            },
+			            cache: false
 			        });
 					
-// 					$.post('ajax/tipo', [$(/*[[${questao}]]*/).serialize(), 'ESCOLHA_MULTIPLA'], function(response){
-// 						 if ($(response).find('.has-error').length) {
-// 			                	$("#ajaxLoadedContent").replaceWith(response);
-// 			                }
-// 		                else{
-// 		                    $("#ajaxLoadedContent").replaceWith(response);
-// 		                }
-// 					});
+
 					
 				});
 			

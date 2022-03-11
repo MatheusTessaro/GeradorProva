@@ -1,7 +1,7 @@
-<div th:fragment="teste">
-	<div th:switch="${questao.tipoQuestao}">
+<div id="ajaxLoadedContent" th:fragment="aberta">
+<!-- 	<div th:switch="${questao.tipoQuestao}"> -->
 	
-		<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}">
+<!-- 		<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}"> -->
 			<div class="row">
 				<div class="col-12">
 					<label class="form-label" for="aberta">Enunciado:</label>
@@ -11,8 +11,9 @@
 				</div>
 			</div>
 		</div>
-	
-		<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA}">
+		
+		<div id="ajaxLoadedContent" th:fragment="multipla">
+<!-- 		<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA}"> -->
 			<div class="row">
 				<div class="col-12">
 						<label class="form-label" for="aberta">Enunciado:</label>
@@ -103,7 +104,8 @@
 			</div>
 		</div>
 		
-		<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}">
+		<div id="ajaxLoadedContent" th:fragment="unica">
+<!-- 		<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}"> -->
 		<div class="row">
 				<div class="col-1 center mt-2">
 					<input 
@@ -185,5 +187,5 @@
 			</div>
 		</div>
 		
-	</div>								
+<!-- 	</div>								 -->
 </div>

@@ -65,7 +65,7 @@ public class QuestaoController{
 	}
 
 	@GetMapping("/listar")
-	public String list(Model model) {
+	public String list(Model model){
 		
 		List<Questao> questoes = questaoService.listAll();
 		
@@ -73,24 +73,27 @@ public class QuestaoController{
 		
 		return "questao/listar";
 	}
-	
-//	@PostMapping("/teste1")
-//	public String teste1(Questao questao, String tipoQuestao, Model model) {
-//		questao.setTipoQuestao(TipoQuestao.ESCOLHA_MULTIPLA);
-//		model.addAttribute(questao);
-//		return "redirect:/questao/novo :: fragment";
-//	}
-	
-	
+
 	
 	@PostMapping("/ajax/tipo/{tipo}")
 	public String ajaxLoadTipoQuestao(Model model, @ModelAttribute("questao") Questao questao, @PathVariable String tipo) {
 		
 		questao.setTipoQuestao(TipoQuestao.valueOf(tipo));
-		questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
 		model.addAttribute(questao);
+		if(tipo.equals(TipoQuestao.ESCOLHA_UNICA.toString())) {
+			questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
+			model.addAttribute(questao);
+			return "questao/fragment :: unica";
+		}else if(tipo.equals(TipoQuestao.ESCOLHA_MULTIPLA.toString())) {
+			questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
+			model.addAttribute(questao);
+			return "questao/fragment :: multipla";
+		}else {
+			model.addAttribute(questao);
+			return "questao/fragment :: aberta";
+		}
+
 		
-	    return "questao/fragment :: teste";
 	}
 
 }

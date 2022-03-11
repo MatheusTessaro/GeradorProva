@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import br.com.geradorprova.model.enumeration.Dificuldade;
 import br.com.geradorprova.model.enumeration.TipoQuestao;
@@ -46,6 +50,7 @@ public class Questao {
 	private Tag tag;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@Fetch(FetchMode.JOIN)
 	@JoinColumn(name = "id_questao")
 	private List<Resposta> respostas;
 	
