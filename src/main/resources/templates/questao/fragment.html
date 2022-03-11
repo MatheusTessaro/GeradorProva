@@ -1,0 +1,92 @@
+<div th:fragment="teste">
+	<div class="row">
+		<div class="col-12">
+				<label class="form-label" for="aberta">Enunciado:</label>
+				<textarea th:field="${questao.enunciado}" class="form-control" id="" name="aberta" placeholder="Enunciado da questão"
+				rows="3" cols="40">
+				</textarea>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-1 center mt-2">
+			<input 
+				class="form-label" type="checkbox" th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[0].respostaCorreta == 1}"  
+				th:field="${questao.respostas[0].respostaCorreta}" th:value="${1}" style="height: 20px; width: 20px;">	
+		</div>
+		<div class="col-11 mb-3">
+			<input
+				type="text" th:field="${questao.respostas[0].resposta}" class="form-control"
+				placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+			<span class="error" th:if="${#fields.hasErrors('${questao.respostas[0].resposta}')}"
+				th:errors="${questao.respostas[0].resposta}">campo invalido</span>
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="col-1 center mt-2">
+			<input 
+				class="form-label" type="checkbox" th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[1].respostaCorreta == 1}"  
+				th:field="${questao.respostas[1].respostaCorreta}" th:value="${1}" style="height: 20px; width: 20px;">	
+
+		</div>
+		<div class="col-11 mb-3">
+			<input
+				type="text" th:field="${questao.respostas[1].resposta}" class="form-control"
+				placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+			<span class="error" th:if="${#fields.hasErrors('${questao.respostas[1].resposta}')}"
+				th:errors="${questao.respostas[1].resposta}">campo invalido</span>
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="col-1 center mt-2">
+			<input 
+				class="form-label" type="checkbox" th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[2].respostaCorreta == 1}"  
+				th:field="${questao.respostas[2].respostaCorreta}" th:value="${1}" style="height: 20px; width: 20px;">	
+		</div>
+		<div class="col-11 mb-3">
+			<input
+				type="text" th:field="${questao.respostas[2].resposta}" class="form-control"
+				placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+			<span class="error" th:if="${#fields.hasErrors('${questao.respostas[2].resposta}')}"
+				th:errors="${questao.respostas[2].resposta}">campo invalido</span>
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="col-1 center mt-2">
+			<input 
+				class="form-label" type="checkbox" th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[3].respostaCorreta == 1}"  
+				th:field="${questao.respostas[3].respostaCorreta}" th:value="${1}" style="height: 20px; width: 20px;">	
+		</div>
+		<div class="col-11 mb-3">
+			<input
+				type="text" th:field="${questao.respostas[3].resposta}" class="form-control"
+				placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+			<span class="error" th:if="${#fields.hasErrors('${questao.respostas[3].resposta}')}"
+				th:errors="${questao.respostas[3].resposta}">campo invalido</span>
+		</div>
+	</div>
+	
+	
+	<div class="row">
+		<div class="col-1 center mt-2">
+			<input 
+				class="form-label" type="checkbox" th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[4].respostaCorreta == 1}"  
+				th:field="${questao.respostas[4].respostaCorreta}" th:value="${1}" style="height: 20px; width: 20px;">	
+		</div>
+		<div class="col-11 mb-3">
+			<input
+				type="text" th:field="${questao.respostas[4].resposta}" class="form-control"
+				placeholder="Adicionar alternativa" th:errorclass="inputError" autocomplete="off">
+			<span class="error" th:if="${#fields.hasErrors('${questao.respostas[4].resposta}')}"
+				th:errors="${questao.respostas[4].resposta}">campo invalido</span>	
+		</div>
+	</div>
+	
+							
+</div>
