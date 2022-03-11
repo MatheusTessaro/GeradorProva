@@ -83,14 +83,13 @@ public class QuestaoController{
 	
 	
 	
-	@PostMapping("/ajax/tipo")
-	public String ajaxLoadTipoQuestao(@ModelAttribute("questao") Questao questao, Model model) {
+	@PostMapping("/ajax/tipo/{tipo}")
+	public String ajaxLoadTipoQuestao(Model model, @ModelAttribute("questao") Questao questao, @PathVariable String tipo) {
 		
-		questao.setTipoQuestao(TipoQuestao.ESCOLHA_MULTIPLA);
+		questao.setTipoQuestao(TipoQuestao.valueOf(tipo));
 		questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
-		List<Resposta> respostas = questao.getRespostas();
 		model.addAttribute(questao);
-		model.addAttribute("respostas", respostas);
+		
 	    return "questao/fragment :: teste";
 	}
 

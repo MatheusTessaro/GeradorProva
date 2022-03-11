@@ -71,7 +71,7 @@
 								<textarea class="form-control" th:field="*{enunciado}" name="aberta" placeholder="Enunciado da questão"
 								rows="3" cols="40">
 								</textarea>
-						</div>
+							</div>
 						</div>
 					</div>
 
@@ -268,7 +268,7 @@
 				$("#idtipoQuestao").change(function (){
 					
 					$.ajax({
-			            url : 'ajax/tipo',
+			            url : 'ajax/tipo/' + $("#idtipoQuestao :selected").val(),
 			            type : 'post',
 			            data : $(/*[[${questao}]]*/).serialize(),
 			            success : function(response) {
@@ -280,6 +280,15 @@
 			                }
 			            }
 			        });
+					
+// 					$.post('ajax/tipo', [$(/*[[${questao}]]*/).serialize(), 'ESCOLHA_MULTIPLA'], function(response){
+// 						 if ($(response).find('.has-error').length) {
+// 			                	$("#ajaxLoadedContent").replaceWith(response);
+// 			                }
+// 		                else{
+// 		                    $("#ajaxLoadedContent").replaceWith(response);
+// 		                }
+// 					});
 					
 				});
 			
