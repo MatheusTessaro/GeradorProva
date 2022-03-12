@@ -29,12 +29,6 @@ public class Prova {
 	@Column
 	private String titulo;
 	
-//	@Column
-//	private Integer finalizada;
-//
-//	@Column
-//	private Integer corrigida;
-	
 	@Column
 	@Enumerated(EnumType.STRING)
 	private ProvaStatus status;
@@ -71,22 +65,6 @@ public class Prova {
 		this.titulo = titulo;
 	}
 
-//	public Integer getFinalizada() {
-//		return finalizada;
-//	}
-//
-//	public void setFinalizada(Integer finalizada) {
-//		this.finalizada = finalizada;
-//	}
-//
-//	public Integer getCorrigida() {
-//		return corrigida;
-//	}
-//
-//	public void setCorrigida(Integer corrigida) {
-//		this.corrigida = corrigida;
-//	}
-	
 	public Long getIdTag() {
 		return idTag;
 	}

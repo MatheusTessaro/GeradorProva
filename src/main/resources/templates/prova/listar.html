@@ -48,7 +48,7 @@
 								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).CORRIGIDA}">
 									Corrigida
 								</div>
-								<div th:case="*">
+								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).CORRIGIDA}">
 									Aberta
 								</div>
 							</td>
