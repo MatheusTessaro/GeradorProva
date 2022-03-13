@@ -39,15 +39,22 @@ public class Prova {
 	@Column
 	private Double nota;
 	
-	@Transient
-	private Long idTag;
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_prova")
 	private List<QuestaoHistorico> questoes;
 	
 	@Transient
-	private Integer numeroQuestoes;
+	private Long idTag;
+	
+	@Transient
+	private Integer qtdeFacil;
+	
+	@Transient
+	private Integer qtdeMedio;
+	
+	@Transient
+	private Integer qtdeDificil;
 
 	public Long getIdProva() {
 		return idProva;
@@ -97,20 +104,40 @@ public class Prova {
 		this.questoes = questoes;
 	}
 
-	public Integer getNumeroQuestoes() {
-		return numeroQuestoes;
-	}
-
-	public void setNumeroQuestoes(Integer numeroQuestoes) {
-		this.numeroQuestoes = numeroQuestoes;
-	}
-
 	public Double getNota() {
 		return nota;
 	}
 
 	public void setNota(Double nota) {
 		this.nota = nota;
+	}
+
+	public Integer getQtdeFacil() {
+		return qtdeFacil;
+	}
+
+	public void setQtdeFacil(Integer qtdeFacil) {
+		this.qtdeFacil = qtdeFacil;
+	}
+
+	public Integer getQtdeMedio() {
+		return qtdeMedio;
+	}
+
+	public void setQtdeMedio(Integer qtdeMedio) {
+		this.qtdeMedio = qtdeMedio;
+	}
+
+	public Integer getQtdeDificil() {
+		return qtdeDificil;
+	}
+
+	public void setQtdeDificil(Integer qtdeDificil) {
+		this.qtdeDificil = qtdeDificil;
+	}
+	
+	public Integer getNumeroQuestoes() {
+		return qtdeDificil + qtdeMedio + qtdeFacil;
 	}
 	
 }

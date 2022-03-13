@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.geradorprova.model.Questao;
@@ -30,8 +30,6 @@ public class QuestaoController{
 	@GetMapping("/novo")
 	public String formNew(Model model) {
 		Questao questao = new Questao();
-//		questao.setRespostas(new ArrayList<>(Collections.nCopies(5, new Resposta())));
-//		questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
 		model.addAttribute(questao);
 		model.addAttribute("tagList", questaoService.findAllTags());
 		
@@ -75,24 +73,28 @@ public class QuestaoController{
 	}
 
 	
-	@PostMapping("/ajax/tipo/{tipo}")
-	public String ajaxLoadTipoQuestao(Model model, @ModelAttribute("questao") Questao questao, @PathVariable String tipo) {
+	
+	@PostMapping(path = "/ajax/tipo/{tipo}", consumes = "application/json")
+	public String ajaxLoadTipoQuestao(@RequestBody Questao questao, Model model, @PathVariable String tipo) {
 		
-		questao.setTipoQuestao(TipoQuestao.valueOf(tipo));
-		model.addAttribute(questao);
-		if(tipo.equals(TipoQuestao.ESCOLHA_UNICA.toString())) {
+		if(questao.getTipoQuestao() == null)
+			questao.setTipoQuestao(TipoQuestao.valueOf(tipo));
+		if(questao.getRespostas().isEmpty() && 
+				(questao.getTipoQuestao().equals(TipoQuestao.ESCOLHA_UNICA) 
+						|| questao.getTipoQuestao().equals(TipoQuestao.ESCOLHA_MULTIPLA))) {
 			questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
+		}
+			
+		if(questao.getTipoQuestao().equals(TipoQuestao.ESCOLHA_UNICA)) {			
 			model.addAttribute(questao);
-			return "questao/fragment :: unica";
+			return "questao/tipoQuestaoFragment :: unica";
 		}else if(tipo.equals(TipoQuestao.ESCOLHA_MULTIPLA.toString())) {
-			questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
 			model.addAttribute(questao);
-			return "questao/fragment :: multipla";
+			return "questao/tipoQuestaoFragment :: multipla";
 		}else {
 			model.addAttribute(questao);
-			return "questao/fragment :: aberta";
+			return "questao/tipoQuestaoFragment :: aberta";
 		}
-
 		
 	}
 

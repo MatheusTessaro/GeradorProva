@@ -21,7 +21,7 @@
 			</div>
 
 			<form th:object="${questao}" th:action="@{/questao/salvar/}"
-				method="POST">
+				method="POST" >
 				<input type="hidden" th:field="${questao.idQuestao}" th:if="${questao.idQuestao}" />
 
 				<div class="row">
@@ -46,8 +46,8 @@
 
 				<div class="row">
 					<div class="col-6">
-						<label class="form-label" for="tipo">Tipo de Questão</label>
-						<select id="idtipoQuestao" name="tipoQuestao" th:field="*{tipoQuestao}" class="form-control select2-single">
+						<label class="form-label" for="tipoQuestao">Tipo de Questão</label>
+						<select id="idTipoQuestao" name="tipoQuestao" th:field="*{tipoQuestao}" class="form-control select2-single">
 							<option value="">Selecione uma opcao</option>
 						    <option th:each="tipo : ${T(br.com.geradorprova.model.enumeration.TipoQuestao).values()}"
 						            th:value="${tipo}"
@@ -58,6 +58,20 @@
 				</div>
 				
 				<div id="ajaxLoadedContent"></div>
+				
+<!-- 				<div th:if="${questao.idQuestao>0}"> -->
+<!-- 					<div th:switch="*{tipoQuestao}"> -->
+<!-- 						<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}" > -->
+<!-- 							<div th:replace="questao/tipoQuestaoFragment :: aberta"></div> -->
+<!-- 						</div> -->
+<!-- 						<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA}"> -->
+<!-- 							<div th:replace="questao/tipoQuestaoFragment :: multipla"></div> -->
+<!-- 						</div> -->
+<!-- 						<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}"> -->
+<!-- 							<div th:replace="questao/tipoQuestaoFragment :: unica"></div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 
 				
 				<div class="mb-3">
@@ -77,31 +91,26 @@
 		/*<![CDATA][*/
 			$(document).ready(function () {
 				
-				console.log($("#idtipoQuestao :selected").val());
 				
-				$("#idTipoQuestao").trigger("change");
-			
-
-				$("#idtipoQuestao").change(function (){
-					console.log("funcionou");
+				if((/*[[${questao.idQuestao}]]*/ null) > 0){
+					document.getElementById("idTipoQuestao").disabled = true;
+				}
+				
+				$("#idTipoQuestao").change(function (){
 					$.ajax({
-			            url : 'ajax/tipo/' + $("#idtipoQuestao :selected").val(),
+			            url : '/questao/ajax/tipo/' + $("#idTipoQuestao :selected").val(),
 			            type : 'post',
-			            data : $(/*[[${questao}]]*/).serialize(),
+			            contentType: 'application/json',
+			            data :  JSON.stringify(/*[[${questao}]]*/),
 			            success : function(response) {
-			                if ($(response).find('.has-error').length) {
-			                	$("#ajaxLoadedContent").replaceWith(response);
-			                }
-			                else{
-			                    $("#ajaxLoadedContent").replaceWith(response);
-			                }
+			                $("#ajaxLoadedContent").replaceWith(response);
 			            },
 			            cache: false
 			        });
-					
 
-					
 				});
+				
+				$("#idTipoQuestao").trigger("change");
 			
 			});
 			

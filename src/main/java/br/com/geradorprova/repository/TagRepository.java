@@ -6,6 +6,5 @@ import br.com.geradorprova.model.Tag;
 
 public interface TagRepository extends JpaRepository<Tag, Long>{
 	
-	Tag findByNome(String nome);
 
 }

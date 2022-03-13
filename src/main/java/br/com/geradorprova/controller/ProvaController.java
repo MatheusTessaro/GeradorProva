@@ -34,6 +34,14 @@ public class ProvaController {
 	@PostMapping("/salvar")
 	public String save(@Valid Prova prova) {
 		
+		provaService.save(prova);
+		
+		return "redirect:/prova/listar";
+	}
+	
+	@PostMapping("/salvar")
+	public String generate(@Valid Prova prova) {
+		
 		provaService.generate(prova);
 		
 		return "redirect:/prova/listar";

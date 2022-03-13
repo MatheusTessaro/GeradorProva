@@ -3,13 +3,12 @@ create database gerador_prova;
 
 create type tipo_questao as enum ('ABERTA', 'ESCOLHA_UNICA', 'ESCOLHA_MULTIPLA');
 create type dificuldade as enum ('FACIL', 'MEDIO', 'DIFICIL');
-create type prova_status as enum ('ABERTA','FINALIZADA', 'CORRIGIDA');
+create type prova_status as enum ('ABERTA', 'FINALIZADA', 'CORRIGIDA');
 
 create table tb_prova(
 	id_prova serial not null primary key,
 	titulo varchar(100) not null,
-	tag varchar(100),
-	status prova_status, 
+	status prova_status default 'ABERTA',
 	nota decimal(4,2)
 );
 
