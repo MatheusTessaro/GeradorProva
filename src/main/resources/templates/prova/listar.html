@@ -32,6 +32,7 @@
 							<th>Tag</th>
 							<th style="width: 150px">Status</th>
 							<th style="width: 50px">Nota</th>
+							<th style="width: 50px">Acao</th>
 							<th style="width: 50px">Deletar</th>
 						</tr>
 					</thead>
@@ -48,11 +49,19 @@
 								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).CORRIGIDA}">
 									Corrigida
 								</div>
-								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).CORRIGIDA}">
+								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).ABERTA}">
 									Aberta
 								</div>
 							</td>
 							<td th:text="${{prova.nota}}" />
+							<td class="center" th:switch="${prova.status}">
+								<a th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).ABERTA}" th:href="@{/prova/realizar/{id}(id=${prova.idProva})}">
+									Realizar
+								</a>	
+								<a th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).REALIZADA}" th:href="@{/prova/corrigir/{id}(id=${prova.idProva})}">
+									Corrigir
+								</a>
+							</td>
 							<td class="center"><a th:href="@{/prova/deletar/{id}(id=${prova.idProva})}">
 									<i class="bi bi-trash" title="delete"></i>
 								</a></td>

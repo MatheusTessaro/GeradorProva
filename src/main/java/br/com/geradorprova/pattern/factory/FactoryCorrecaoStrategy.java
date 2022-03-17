@@ -11,15 +11,15 @@ public class FactoryCorrecaoStrategy {
 		CorrecaoQuestaoStrategy strategy = null;
 		
 		switch (tipoQuestao) {
-		case "ESCOLHA_UNICA":
-			strategy = new CorrecaoQuestaoUnica();
-			break;
-		case "ESCOLHA_MULTIPLA":
-			strategy = new CorrecaoQuestaoMultipla();
-			break;
-		default:
-			break;
-		}
+			case "ESCOLHA_UNICA":
+				strategy = new CorrecaoQuestaoUnica();
+				break;
+			case "ESCOLHA_MULTIPLA":
+				strategy = new CorrecaoQuestaoMultipla();
+				break;
+			default:
+				break;
+			}
 		
 		return strategy;
 	}

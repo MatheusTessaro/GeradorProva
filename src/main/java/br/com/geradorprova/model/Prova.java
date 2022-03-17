@@ -1,5 +1,6 @@
 package br.com.geradorprova.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -42,19 +43,19 @@ public class Prova {
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_prova")
-	private List<QuestaoHistorico> questoes;
+	private List<QuestaoHistorico> questoes = new ArrayList<>();
 	
 	@Transient
 	private Long idTag;
 	
 	@Transient
-	private Integer qtdeFacil;
+	private Integer qtdeFacil = 0;
 	
 	@Transient
-	private Integer qtdeMedio;
+	private Integer qtdeMedio = 0;
 	
 	@Transient
-	private Integer qtdeDificil;
+	private Integer qtdeDificil = 0;
 
 	public Long getIdProva() {
 		return idProva;

@@ -22,6 +22,7 @@ import br.com.geradorprova.model.RespostaHistorico;
 import br.com.geradorprova.model.Tag;
 import br.com.geradorprova.model.enumeration.Dificuldade;
 import br.com.geradorprova.model.enumeration.ProvaStatus;
+import br.com.geradorprova.model.enumeration.TipoQuestao;
 import br.com.geradorprova.pattern.factory.FactoryCorrecaoStrategy;
 import br.com.geradorprova.pattern.strategy.CorrecaoQuestaoStrategy;
 import br.com.geradorprova.repository.ProvaRepository;
@@ -50,6 +51,9 @@ public class ProvaService {
 			Double nota = 0.00;
 			for(QuestaoHistorico questao : prova.getQuestoes()) {
 				nota += questao.getNota();
+//				if(questao.getTipoQuestao().equals(TipoQuestao.ABERTA)) {
+//					questao.setRespostas(new ArrayList<>());
+//				}
 			}
 			prova.setNota(BigDecimal.valueOf(nota).setScale(1, RoundingMode.HALF_EVEN).doubleValue());
 		}
@@ -75,8 +79,7 @@ public class ProvaService {
 		questoesProva.addAll(addQuestaoToHistorico(questoesMedias.subList(0, prova.getQtdeMedio())));
 		questoesProva.addAll(addQuestaoToHistorico(questoesDificeis.subList(0, prova.getQtdeDificil())));
 		
-		
-		prova.setQuestoes(calcValorQuestao(prova));
+		prova.setQuestoes(calcValorQuestao(prova,  questoesProva));
 
 		daoProva.save(prova);
 		
@@ -124,14 +127,14 @@ public class ProvaService {
 		return respostaHistorico;
 	}
 	
-	private List<QuestaoHistorico> calcValorQuestao(Prova prova) {
+	private List<QuestaoHistorico> calcValorQuestao(Prova prova, List<QuestaoHistorico> questoesProva) {
 		
 		double valor;
 		
 		valor = prova.getQtdeFacil() + (prova.getQtdeMedio() * 2D) + (prova.getQtdeDificil() * 3D);
 		valor = 100 / valor;
 		
-		for(QuestaoHistorico q : prova.getQuestoes()) {
+		for(QuestaoHistorico q : questoesProva) {
 			if(q.getDificuldade().equals(Dificuldade.FACIL)) 
 				q.setValor(valor);
 			else if(q.getDificuldade().equals(Dificuldade.MEDIO))
@@ -141,7 +144,7 @@ public class ProvaService {
 		}
 		
 		
-		return prova.getQuestoes();
+		return questoesProva;
 	}
 
 	

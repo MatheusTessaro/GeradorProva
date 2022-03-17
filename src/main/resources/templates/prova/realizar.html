@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="head :: head"></head>
+	
+	<body>
+	
+		<div th:replace="menu :: menu"></div>
+	
+		<main class="container">
+			<div class="bg-light p-5 rounded">
+				<p>Cadastro</p>
+	
+				
+				<form th:object="${prova}" action="/prova/salvar" method="POST">
+					<input type="hidden" th:field="*{idProva}" id="idProva">
+					<input type="hidden" th:field="*{status}" id="status">
+					<input type="hidden" th:field="*{tag}" id="tag">
+					<input type="hidden" th:field="*{titulo}" id="tag">
+					<h2 th:text="*{titulo}"></h2>
+					
+					<div th:each="q : *{questoes}">
+<!-- 						<input type="hidden" th:field="*{questoes[__${qStat.index}__].enunciado}" id="enunciado"> -->
+						<p th:text="${q.enunciado}"></p>
+						<div th:switch="${q.tipoQuestao}">
+							<div class="col-12" th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}">
+							
+								<label class="form-label" for="aberta">Resposta:</label>
+								<textarea class="form-control" th:field="*{questoes[__${qStat.index}__].respostas[0].resposta}"
+									name="aberta" placeholder="Enunciado da questão" rows="3" cols="40">
+								</textarea>
+							</div>
+							<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}">
+								<div th:each="resp : *{questoes[__${qStat.index}__].respostas}" class="row">
+									<div class="col-1 center mt-2">
+										<input class="form-label" type="RADIO" name="unica"
+											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
+											style="height: 20px; width: 20px;">
+									</div>
+									<div class="col-11 mb-3">
+										<label th:text="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}"
+											class="form-control" ></label>
+									</div>
+								</div>
+							</div>
+							<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA}">
+								<div th:each="resp : *{questoes[__${qStat.index}__].respostas}" class="row">
+									<div class="col-1 center mt-2">
+										<input class="form-label" type="checkbox" name="unica"
+											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
+											style="height: 20px; width: 20px;">
+									</div>
+									<div class="col-11 mb-3">
+										<label th:text="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}"
+											class="form-control"></label> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+<!-- 					<div class="row"> -->
+<!-- 						<div class="col-8"> -->
+<!-- 							<label class="form-label" for="tag">Tag</label> -->
+							
+<!-- 							<select th:field="*{idTag}" class="form-control select2-single"> -->
+<!-- 								<option th:each="tag : ${tagList}" th:value="${tag.idTag}" th:text="${tag.nome}"> -->
+<!-- 							</select> -->
+<!-- 						</div> -->
+		
+<!-- 						<div class="col-4 mt-4"> -->
+<!-- 							<label class="form-label" for="qtdeQuestoes">Quantidade de questoes</label> -->
+							
+<!-- 							<input name="qtdeQuestoes" type="number" min="0"> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+					
+					<button type="submit" class="btn-c btn btn-secondary active my-3">
+						Finalizar
+					</button>
+					
+				</form>
+			</div>
+		</main>
+		<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	</body>
+</html>
