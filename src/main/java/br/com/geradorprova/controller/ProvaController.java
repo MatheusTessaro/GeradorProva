@@ -39,7 +39,7 @@ public class ProvaController {
 		return "redirect:/prova/listar";
 	}
 	
-	@PostMapping("/salvar")
+	@PostMapping("/gerar")
 	public String generate(@Valid Prova prova) {
 		
 		provaService.generate(prova);
