@@ -26,9 +26,6 @@ public class Resposta {
 	@Column(name = "id_questao")
 	private Long idQuestao;
 	
-	@Transient
-	private Boolean checked;
-	
 	public Long getIdResposta() {
 		return idResposta;
 	}
@@ -60,14 +57,6 @@ public class Resposta {
 
 	public void setIdQuestao(Long idQuestao) {
 		this.idQuestao = idQuestao;
-	}
-
-	public Boolean isCorrect() {
-		return checked;
-	}
-
-	public void setCorrect(Boolean isCorrect) {
-		this.checked = isCorrect;
 	}
 
 }

@@ -47,6 +47,7 @@
 				<div class="row">
 					<div class="col-6">
 						<label class="form-label" for="tipoQuestao">Tipo de Questão</label>
+						<input type="hidden" th:field="${questao.tipoQuestao}" th:if="${questao.idQuestao}" />
 						<select id="idTipoQuestao" name="tipoQuestao" th:field="*{tipoQuestao}" class="form-control select2-single">
 							<option value="">Selecione uma opcao</option>
 						    <option th:each="tipo : ${T(br.com.geradorprova.model.enumeration.TipoQuestao).values()}"
@@ -90,12 +91,16 @@
 	<script th:inline="javascript">
 		/*<![CDATA][*/
 			$(document).ready(function () {
-				
+				/*[[${questao.idQuestao}]]*/
+				/*[[${questao.tipoQuestao}]]*/
 				
 				if((/*[[${questao.idQuestao}]]*/ null) > 0){
 					document.getElementById("idTipoQuestao").disabled = true;
 				}
 				
+				console.log($("#idTipoQuestao :selected").val())
+				/*[[${questao.tipoQuestao}]]*/
+				/*[[${questao.idQuestao}]]*/
 				$("#idTipoQuestao").change(function (){
 					$.ajax({
 			            url : '/questao/ajax/tipo/' + $("#idTipoQuestao :selected").val(),

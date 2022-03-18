@@ -28,12 +28,11 @@
 
 						<div class="mb-5" th:switch="${q.tipoQuestao}">
 							<div class="col-12" th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}">
-								<label class="form-label" for="aberta">Resposta:</label>			
+								<label class="form-label" for="aberta">Resposta:</label>
 								<textarea class="form-control" th:field="*{questoes[__${qStat.index}__].respostas[0].resposta}"
 									name="aberta" placeholder="Responda aqui" rows="3" cols="40">
 								</textarea>
 							</div>
-
 							<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}">
 								<div th:each="resp : *{questoes[__${qStat.index}__].respostas}" class="row">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].idRespostaHistorico}" id="idRespostaHistorico">
@@ -51,14 +50,13 @@
 									</div>
 								</div>
 							</div>
-
 							<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA}">
 								<div th:each="resp : *{questoes[__${qStat.index}__].respostas}" class="row">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].idRespostaHistorico}" id="idRespostaHistorico">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].idQuestaoHistorico}" id="idQuestaoHistorico">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}" id="resposta">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].respostaCorreta}" id="respostaCorreta">
-									<div class="col-1 center">
+									<div class="col-1 center mt-2">
 										<input class="form-label" type="checkbox" name="unica"
 											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
 											style="height: 20px; width: 20px;">
