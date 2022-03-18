@@ -51,9 +51,6 @@ public class ProvaService {
 			Double nota = 0.00;
 			for(QuestaoHistorico questao : prova.getQuestoes()) {
 				nota += questao.getNota();
-//				if(questao.getTipoQuestao().equals(TipoQuestao.ABERTA)) {
-//					questao.setRespostas(new ArrayList<>());
-//				}
 			}
 			prova.setNota(BigDecimal.valueOf(nota).setScale(1, RoundingMode.HALF_EVEN).doubleValue());
 		}
@@ -80,6 +77,8 @@ public class ProvaService {
 		questoesProva.addAll(addQuestaoToHistorico(questoesDificeis.subList(0, prova.getQtdeDificil())));
 		
 		prova.setQuestoes(calcValorQuestao(prova,  questoesProva));
+		
+		prova.setStatus(ProvaStatus.ABERTA);
 
 		daoProva.save(prova);
 		

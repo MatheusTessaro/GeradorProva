@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.bind.DefaultValue;
+
 import br.com.geradorprova.model.enumeration.ProvaStatus;
 
 @Entity
@@ -76,6 +79,10 @@ public class Prova {
 	public Long getIdTag() {
 		return idTag;
 	}
+	
+	public void setIdTag(Long idTag) {
+		this.idTag = idTag;
+	}
 
 	public String getTag() {
 		return tag;
@@ -93,9 +100,6 @@ public class Prova {
 		this.status = status;
 	}
 
-	public void setIdTag(Long idTag) {
-		this.idTag = idTag;
-	}
 
 	public List<QuestaoHistorico> getQuestoes() {
 		return questoes;

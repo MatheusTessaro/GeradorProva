@@ -53,12 +53,12 @@
 									Aberta
 								</div>
 							</td>
-							<td th:text="${{prova.nota}}" />
+							<td th:text="${prova.nota}" />
 							<td class="center" th:switch="${prova.status}">
 								<a th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).ABERTA}" th:href="@{/prova/realizar/{id}(id=${prova.idProva})}">
 									Realizar
 								</a>	
-								<a th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).REALIZADA}" th:href="@{/prova/corrigir/{id}(id=${prova.idProva})}">
+								<a th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).FINALIZADA}" th:href="@{/prova/corrigir/{id}(id=${prova.idProva})}">
 									Corrigir
 								</a>
 							</td>
