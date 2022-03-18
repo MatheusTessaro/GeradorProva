@@ -14,7 +14,7 @@
 	<main class="container">
 		<div class="bg-light p-5 rounded">
 			<h3>Gerenciar Questão</h3>
-
+			
 			<div th:switch="${questao.idQuestao>0}">
 				<p th:case="${true}">Atualizar Questão</p>
 				<p th:case="*">Cadastro Questão</p>
@@ -49,7 +49,7 @@
 						<label class="form-label" for="tipoQuestao">Tipo de Questão</label>
 						<input type="hidden" th:field="${questao.tipoQuestao}" th:if="${questao.idQuestao}" />
 						<select id="idTipoQuestao" name="tipoQuestao" th:field="*{tipoQuestao}" class="form-control select2-single">
-							<option value="">Selecione uma opcao</option>
+							<option value="">Selecione uma opção</option>
 						    <option th:each="tipo : ${T(br.com.geradorprova.model.enumeration.TipoQuestao).values()}"
 						            th:value="${tipo}"
 						            th:text="${tipo.valor}">
@@ -57,6 +57,7 @@
 						</select>
 					</div>
 				</div>
+				
 				
 				<div id="ajaxLoadedContent"></div>
 				
@@ -91,16 +92,11 @@
 	<script th:inline="javascript">
 		/*<![CDATA][*/
 			$(document).ready(function () {
-				/*[[${questao.idQuestao}]]*/
-				/*[[${questao.tipoQuestao}]]*/
 				
 				if((/*[[${questao.idQuestao}]]*/ null) > 0){
 					document.getElementById("idTipoQuestao").disabled = true;
 				}
 				
-				console.log($("#idTipoQuestao :selected").val())
-				/*[[${questao.tipoQuestao}]]*/
-				/*[[${questao.idQuestao}]]*/
 				$("#idTipoQuestao").change(function (){
 					$.ajax({
 			            url : '/questao/ajax/tipo/' + $("#idTipoQuestao :selected").val(),

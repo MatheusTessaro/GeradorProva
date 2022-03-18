@@ -130,7 +130,7 @@ public class ProvaService {
 		
 		double valor;
 		
-		valor = prova.getQtdeFacil() + (prova.getQtdeMedio() * 2D) + (prova.getQtdeDificil() * 3D);
+		valor = prova.getQtdeFacil() + (prova.getQtdeMedio() * 1.5) + (prova.getQtdeDificil() * 2);
 		valor = 100 / valor;
 		
 		for(QuestaoHistorico q : questoesProva) {

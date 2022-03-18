@@ -30,6 +30,7 @@ public class QuestaoController{
 	@GetMapping("/novo")
 	public String formNew(Model model) {
 		Questao questao = new Questao();
+		questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
 		model.addAttribute(questao);
 		model.addAttribute("tagList", questaoService.findAllTags());
 		
@@ -37,7 +38,7 @@ public class QuestaoController{
 	}
 	
 	@PostMapping("/salvar")
-	public String save(@Valid Questao questao, Model model) {
+	public String save(Questao questao, Model model) {
 		
 		questaoService.save(questao);
 		
