@@ -8,8 +8,9 @@ create type prova_status as enum ('ABERTA', 'FINALIZADA', 'CORRIGIDA');
 create table tb_prova(
 	id_prova serial not null primary key,
 	titulo varchar(100) not null,
+	tag varchar(50),
 	status prova_status default 'ABERTA',
-	nota decimal(4,2)
+	nota decimal(5,2)
 );
 
 create table tb_tag(
