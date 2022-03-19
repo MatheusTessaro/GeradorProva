@@ -24,7 +24,7 @@
 						<input type="hidden" th:field="*{questoes[__${qStat.index}__].valor}" id="valor">
 						<input type="hidden" th:field="*{questoes[__${qStat.index}__].idProva}" id="idProva">
 
-						<p style="font-size: 20px;" th:text="${q.enunciado}"></p>
+						<p style="font-size: 20px;" th:text="${qStat.index + 1} + ' - ' + ${q.enunciado}"></p>
 
 						<div class="mb-5" th:switch="${q.tipoQuestao}">
 							<div class="col-12" th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}">

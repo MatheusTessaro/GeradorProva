@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Value;
+
 @Entity
 @Table(name = "tb_resposta_historico")
 public class RespostaHistorico {
@@ -20,10 +22,10 @@ public class RespostaHistorico {
 	private String resposta;
 	
 	@Column(name = "resposta_correta")
-	private Integer respostaCorreta;
+	private Integer respostaCorreta = 0;
 	
 	@Column
-	private Integer selecionado;
+	private Integer selecionado = 0;
 
 	@Column(name = "id_questao_historico")
 	private Long idQuestaoHistorico;
@@ -49,7 +51,10 @@ public class RespostaHistorico {
 	}
 
 	public void setRespostaCorreta(Integer respostaCorreta) {
-		this.respostaCorreta = respostaCorreta;
+		if(respostaCorreta == null)
+			this.respostaCorreta = 0;
+		else
+			this.respostaCorreta = respostaCorreta;
 	}
 
 	public Integer getSelecionado() {
@@ -57,7 +62,10 @@ public class RespostaHistorico {
 	}
 
 	public void setSelecionado(Integer selecionado) {
-		this.selecionado = selecionado;
+		if(selecionado == null) 
+			this.selecionado = 0;
+		else
+			this.selecionado = selecionado;
 	}
 
 	public Long getIdQuestaoHistorico() {

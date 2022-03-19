@@ -50,6 +50,13 @@ public class ProvaService {
 			prova.setStatus(ProvaStatus.CORRIGIDA);
 			Double nota = 0.00;
 			for(QuestaoHistorico questao : prova.getQuestoes()) {
+				if(questao.getTipoQuestao().equals(TipoQuestao.ABERTA)) {
+					if(questao.getAcertou() == 1) {
+						questao.setNota(questao.getValor());
+					}else if(questao.getAcertou() == 0) {
+						questao.setNota(0.0);
+					}
+				}
 				nota += questao.getNota();
 			}
 			prova.setNota(BigDecimal.valueOf(nota).setScale(1, RoundingMode.HALF_EVEN).doubleValue());
@@ -94,9 +101,12 @@ public class ProvaService {
 		FactoryCorrecaoStrategy factory = new FactoryCorrecaoStrategy();
 
 		for(QuestaoHistorico questao : prova.getQuestoes()) {
+			if(questao.getTipoQuestao().equals(TipoQuestao.ABERTA)) {
+				continue;
+			}
 			
 			correcaoStrategy = factory.createStrategy(questao.getTipoQuestao().toString());
-			correcaoStrategy.corrigir(questao);
+			questao.setNota(correcaoStrategy.corrigir(questao));
 		}
 		
 		return prova;

@@ -23,15 +23,26 @@
 						<input type="hidden" th:field="*{questoes[__${qStat.index}__].dificuldade}" id="dificuldade">
 						<input type="hidden" th:field="*{questoes[__${qStat.index}__].valor}" id="valor">
 						<input type="hidden" th:field="*{questoes[__${qStat.index}__].idProva}" id="idProva">
-
+						<input type="hidden" th:field="*{questoes[__${qStat.index}__].nota}" id="nota">
+						
 						<p style="font-size: 20px;" th:text="${q.enunciado}"></p>
 
 						<div class="mb-5" th:switch="${q.tipoQuestao}">
 							<div class="col-12" th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}">
 								<label class="form-label" for="aberta">Resposta:</label>			
-								<textarea class="form-control" th:field="*{questoes[__${qStat.index}__].respostas[0].resposta}"
+								<textarea class="form-control" readonly th:field="*{questoes[__${qStat.index}__].respostas[0].resposta}"
 									name="aberta" placeholder="Responda aqui" rows="3" cols="40">
 								</textarea>
+								<div class="col-3 mt-2 center">
+									<select th:field="*{questoes[__${qStat.index}__].acertou}" class="form-control select2-single">
+										<option value="">Selecione uma opção</option>
+									    <option th:value="${1}">Certo!</option>
+									    <option th:value="${0}">Errado!</option>
+									</select>
+								</div>
+								
+<!-- 								<button type="button" class="mt-2 btn btn-danger"><i class="bi bi-x"></i></button> <button type="button" class="pull-right mt-2 btn btn-success"><i class="bi bi-check"></i></button> -->
+								
 							</div>
 
 							<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}">
@@ -40,8 +51,10 @@
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].idQuestaoHistorico}" id="idQuestaoHistorico">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}" id="resposta">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].respostaCorreta}" id="respostaCorreta">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" id="selecionado">
 									<div class="col-1 center">
 										<input class="form-label" type="RADIO" name="unica"
+											th:checked="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado == 1}"
 											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
 											style="height: 20px; width: 20px;">
 									</div>
@@ -58,8 +71,11 @@
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].idQuestaoHistorico}" id="idQuestaoHistorico">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}" id="resposta">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].respostaCorreta}" id="respostaCorreta">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" id="selecionado">
 									<div class="col-1 center">
 										<input class="form-label" type="checkbox" name="unica"
+											disabled
+											th:checked="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado == 1}"
 											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
 											style="height: 20px; width: 20px;">
 									</div>
@@ -72,8 +88,7 @@
 						</div>
 					</div>
 					
-					<button type="submit" class="btn-c btn btn-secondary active my-3">
-						Finalizar
+					<button type="submit" th:text="Finalizar" class="btn-c btn btn-secondary active my-3">
 					</button>
 					
 				</form>

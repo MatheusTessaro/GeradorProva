@@ -61,21 +61,6 @@
 				
 				<div id="ajaxLoadedContent"></div>
 				
-<!-- 				<div th:if="${questao.idQuestao>0}"> -->
-<!-- 					<div th:switch="*{tipoQuestao}"> -->
-<!-- 						<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}" > -->
-<!-- 							<div th:replace="questao/tipoQuestaoFragment :: aberta"></div> -->
-<!-- 						</div> -->
-<!-- 						<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA}"> -->
-<!-- 							<div th:replace="questao/tipoQuestaoFragment :: multipla"></div> -->
-<!-- 						</div> -->
-<!-- 						<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}"> -->
-<!-- 							<div th:replace="questao/tipoQuestaoFragment :: unica"></div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-
-				
 				<div class="mb-3">
 					<p th:switch="${questao.idQuestao>0}">
 						<button th:case="${true}" type="submit"
