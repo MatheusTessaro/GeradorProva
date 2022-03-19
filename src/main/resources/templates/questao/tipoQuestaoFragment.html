@@ -44,20 +44,21 @@
 			</textarea>
 		</div>
 	</div>
-	
+
 	<div class="row" th:each="resp : ${questao.respostas}">
 		<div class="col-1 center mt-2">
-			<input class="form-label" type="radio"
-				th:name="${questao.respostas[__${respStat.index}__].respostaCorreta}"
-				name="opcao"
-				th:checked="${questao.respostas[__${respStat.index}__].respostaCorreta == 1}"
-				th:value="${1}"
+			<input class="form-label" type="checkbox" 
+				th:onclick="myFunction(this, /*[[${questao.idQuestao}]]*/)"
+				th:id="${questao.idQuestao} + '_' + ${resp.idResposta}"
+				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[__${respStat.index}__].respostaCorreta == 1}"
+				th:field="${questao.respostas[__${respStat.index}__].respostaCorreta}" th:value="${1}"
 				style="height: 20px; width: 20px;">
 		</div>
 		<div class="col-11 mb-3">
 			<input type="text" th:field="${questao.respostas[__${respStat.index}__].resposta}"
 				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
+				autocomplete="off"> 
 		</div>
 	</div>
+	
 </div>

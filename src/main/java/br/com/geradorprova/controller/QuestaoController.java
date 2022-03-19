@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +28,7 @@ public class QuestaoController{
 	@GetMapping("/novo")
 	public String formNew(Model model) {
 		Questao questao = new Questao();
-		questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
+//		questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
 		model.addAttribute(questao);
 		model.addAttribute("tagList", questaoService.findAllTags());
 		

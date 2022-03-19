@@ -40,7 +40,8 @@
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}" id="resposta">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].respostaCorreta}" id="respostaCorreta">
 									<div class="col-1 center">
-										<input class="form-label" type="RADIO" name="unica"
+										<input class="form-label" type="checkbox" th:onclick="myFunction(this, /*[[${q.idQuestaoHistorico}]]*/)" 
+											name="unica" th:id="${q.idQuestaoHistorico} + '_' + ${resp.idRespostaHistorico}"
 											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
 											style="height: 20px; width: 20px;">
 									</div>
@@ -57,7 +58,7 @@
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}" id="resposta">
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].respostaCorreta}" id="respostaCorreta">
 									<div class="col-1 center mt-2">
-										<input class="form-label" type="checkbox" name="unica"
+										<input class="form-label" type="checkbox" id="multipla"
 											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
 											style="height: 20px; width: 20px;">
 									</div>
@@ -78,5 +79,13 @@
 			</div>
 		</main>
 		<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+		<script type="text/javascript">
+			function myFunction(e, idQuestao) {
+				var inputs = $(`[id^=${idQuestao}]`);
+			    inputs.get().forEach(function(el) { 
+			        el.checked = el == e && e.checked;
+			    }, this);
+			}
+		</script>
 	</body>
 </html>
