@@ -19,13 +19,11 @@
 						<label class="form-label" for="titulo">Titulo</label> 
 						<input type="text" th:field="*{titulo}"
 							class="form-control" placeholder="Enunciado da Prova" 
-							th:errorclass="inputError"autocomplete="off"> 
-							<span class="error" th:if="${#fields.hasErrors('titulo')}"
-							th:errors="*{titulo}">campo invalido</span>
+							autocomplete="off"> 
 					</div>
 					
 					<div class="row">
-						<div class="col-8">
+						<div class="col-12">
 							<label class="form-label" for="tag">Tag</label>
 							
 							<select th:field="*{idTag}" class="form-control select2-single">
@@ -33,12 +31,27 @@
 							</select>
 						</div>
 		
-						<div class="col-4 mt-4">
-							<label class="form-label" for="qtdeQuestoes">Quantidade de questoes</label>
-							
-							<input name="qtdeQuestoes" type="number" min="0" th:field="*{numeroQuestoes}">
-						</div>
 					</div>
+					<div class="row">
+						<label class="form-label" style="font-size:25px; text-align:center;">Quantidade de questões por dificuldade</label>				
+					</div>
+					<div class="row">
+						<div class="col-4 mt-4">
+							<label class="form-label" for="qtdeQuestoesFacil">Facil:</label>
+							
+							<input name="qtdeQuestoes" type="number" min="0" th:field="*{qtdeFacil}">
+						</div>
+						<div class="col-4 mt-4">
+							<label class="form-label" for="qtdeQuestoesMedio">Medio:</label>
+							
+							<input name="qtdeQuestoes" type="number" min="0" th:field="*{qtdeMedio}">
+						</div>
+						<div class="col-4 mt-4">
+							<label class="form-label" for="qtdeQuestoesDificil">Dificil:</label>
+							
+							<input name="qtdeQuestoes" type="number" min="0" th:field="*{qtdeDificil}">
+						</div>
+					</div>	
 					
 					<button type="submit" class="btn-c btn btn-secondary active my-3">
 						Gerar

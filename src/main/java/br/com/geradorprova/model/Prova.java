@@ -1,5 +1,6 @@
 package br.com.geradorprova.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import br.com.geradorprova.model.enumeration.ProvaStatus;
 
@@ -42,19 +46,19 @@ public class Prova {
 	
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "id_prova")
-	private List<QuestaoHistorico> questoes;
+	private List<QuestaoHistorico> questoes = new ArrayList<>();
 	
 	@Transient
 	private Long idTag;
 	
 	@Transient
-	private Integer qtdeFacil;
+	private Integer qtdeFacil = 0;
 	
 	@Transient
-	private Integer qtdeMedio;
+	private Integer qtdeMedio = 0;
 	
 	@Transient
-	private Integer qtdeDificil;
+	private Integer qtdeDificil = 0;
 
 	public Long getIdProva() {
 		return idProva;
@@ -75,6 +79,10 @@ public class Prova {
 	public Long getIdTag() {
 		return idTag;
 	}
+	
+	public void setIdTag(Long idTag) {
+		this.idTag = idTag;
+	}
 
 	public String getTag() {
 		return tag;
@@ -92,9 +100,6 @@ public class Prova {
 		this.status = status;
 	}
 
-	public void setIdTag(Long idTag) {
-		this.idTag = idTag;
-	}
 
 	public List<QuestaoHistorico> getQuestoes() {
 		return questoes;

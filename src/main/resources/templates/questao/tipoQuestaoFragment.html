@@ -14,84 +14,23 @@
 	<div class="row">
 		<div class="col-12">
 			<label class="form-label" for="aberta">Enunciado:</label>
-			<textarea th:field="${questao.enunciado}" class="form-control" id=""
+			<textarea th:field="${questao.enunciado}" class="form-control"
 				name="aberta" placeholder="Enunciado da questão" rows="3" cols="40">
 			</textarea>
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" th:each="resp : ${questao.respostas}">
 		<div class="col-1 center mt-2">
 			<input class="form-label" type="checkbox"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[0].respostaCorreta == 1}"
-				th:field="${questao.respostas[0].respostaCorreta}" th:value="${1}"
+				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[__${respStat.index}__].respostaCorreta == 1}"
+				th:field="${questao.respostas[__${respStat.index}__].respostaCorreta}" th:value="${1}"
 				style="height: 20px; width: 20px;">
 		</div>
 		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[0].resposta}"
+			<input type="text" th:field="${questao.respostas[__${respStat.index}__].resposta}"
 				class="form-control" placeholder="Adicionar alternativa"
 				autocomplete="off"> 
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-1 center mt-2">
-			<input class="form-label" type="checkbox"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[1].respostaCorreta == 1}"
-				th:field="${questao.respostas[1].respostaCorreta}" th:value="${1}"
-				style="height: 20px; width: 20px;">
-
-		</div>
-		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[1].resposta}"
-				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-1 center mt-2">
-			<input class="form-label" type="checkbox"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[2].respostaCorreta == 1}"
-				th:field="${questao.respostas[2].respostaCorreta}" th:value="${1}"
-				style="height: 20px; width: 20px;">
-		</div>
-		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[2].resposta}"
-				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-1 center mt-2">
-			<input class="form-label" type="checkbox"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[3].respostaCorreta == 1}"
-				th:field="${questao.respostas[3].respostaCorreta}" th:value="${1}"
-				style="height: 20px; width: 20px;">
-		</div>
-		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[3].resposta}"
-				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-1 center mt-2">
-			<input class="form-label" type="checkbox"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[4].respostaCorreta == 1}"
-				th:field="${questao.respostas[4].respostaCorreta}" th:value="${1}"
-				style="height: 20px; width: 20px;">
-		</div>
-		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[4].resposta}"
-				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
 		</div>
 	</div>
 </div>
@@ -99,89 +38,27 @@
 <div id="ajaxLoadedContent" th:fragment="unica">
 	<div class="row">
 		<div class="col-12">
-				<label class="form-label" for="aberta">Enunciado:</label>
-				<textarea class="form-control" th:field="${questao.enunciado}" name="aberta" placeholder="Enunciado da questão"
-				rows="3" cols="40">
-				</textarea>
+			<label class="form-label" for="aberta">Enunciado:</label>
+			<textarea class="form-control" th:field="${questao.enunciado}" name="aberta" placeholder="Enunciado da questão"
+			rows="3" cols="40">
+			</textarea>
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row" th:each="resp : ${questao.respostas}">
 		<div class="col-1 center mt-2">
-			<input class="form-label" type="RADIO"
-				name="opcao"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[0].respostaCorreta == 1}"
-				th:field="${questao.respostas[0].respostaCorreta}" th:value="${1}"
+			<input class="form-label" type="checkbox" 
+				th:onclick="myFunction(this, /*[[${questao.idQuestao}]]*/)"
+				th:id="${questao.idQuestao} + '_' + ${resp.idResposta}"
+				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[__${respStat.index}__].respostaCorreta == 1}"
+				th:field="${questao.respostas[__${respStat.index}__].respostaCorreta}" th:value="${1}"
 				style="height: 20px; width: 20px;">
 		</div>
 		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[0].resposta}"
+			<input type="text" th:field="${questao.respostas[__${respStat.index}__].resposta}"
 				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
+				autocomplete="off"> 
 		</div>
 	</div>
-
-
-	<div class="row">
-		<div class="col-1 center mt-2">
-			<input class="form-label" type="RADIO"
-				name="opcao"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[1].respostaCorreta == 1}"
-				th:field="${questao.respostas[1].respostaCorreta}" th:value="${1}"
-				style="height: 20px; width: 20px;">
-
-		</div>
-		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[1].resposta}"
-				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-1 center mt-2">
-			<input class="form-label" type="RADIO"
-				name="opcao"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[2].respostaCorreta == 1}"
-				th:field="${questao.respostas[2].respostaCorreta}" th:value="${1}"
-				style="height: 20px; width: 20px;">
-		</div>
-		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[2].resposta}"
-				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
-		</div>
-	</div>
-
-
-	<div class="row">
-		<div class="col-1 center mt-2">
-			<input class="form-label" type="RADIO"
-				name="opcao"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[3].respostaCorreta == 1}"
-				th:field="${questao.respostas[3].respostaCorreta}" th:value="${1}"
-				style="height: 20px; width: 20px;">
-		</div>
-		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[3].resposta}"
-				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
-		</div>
-	</div>	
-
-	<div class="row">
-		<div class="col-1 center mt-2">
-			<input class="form-label" type="RADIO"
-				name="opcao"
-				th:checked="${not #lists.isEmpty(questao.respostas) && questao.respostas[4].respostaCorreta == 1}"
-				th:field="${questao.respostas[4].respostaCorreta}" th:value="${1}"
-				style="height: 20px; width: 20px;">
-		</div>
-		<div class="col-11 mb-3">
-			<input type="text" th:field="${questao.respostas[4].resposta}"
-				class="form-control" placeholder="Adicionar alternativa"
-				autocomplete="off">
-		</div>
-	</div>
+	
 </div>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="head :: head"></head>
 
@@ -14,7 +14,7 @@
 	<main class="container">
 		<div class="bg-light p-5 rounded">
 			<h3>Gerenciar Questão</h3>
-
+			
 			<div th:switch="${questao.idQuestao>0}">
 				<p th:case="${true}">Atualizar Questão</p>
 				<p th:case="*">Cadastro Questão</p>
@@ -47,8 +47,9 @@
 				<div class="row">
 					<div class="col-6">
 						<label class="form-label" for="tipoQuestao">Tipo de Questão</label>
+						<input type="hidden" th:field="${questao.tipoQuestao}" th:if="${questao.idQuestao}" />
 						<select id="idTipoQuestao" name="tipoQuestao" th:field="*{tipoQuestao}" class="form-control select2-single">
-							<option value="">Selecione uma opcao</option>
+							<option value="">Selecione uma opção</option>
 						    <option th:each="tipo : ${T(br.com.geradorprova.model.enumeration.TipoQuestao).values()}"
 						            th:value="${tipo}"
 						            th:text="${tipo.valor}">
@@ -57,22 +58,8 @@
 					</div>
 				</div>
 				
-				<div id="ajaxLoadedContent"></div>
 				
-<!-- 				<div th:if="${questao.idQuestao>0}"> -->
-<!-- 					<div th:switch="*{tipoQuestao}"> -->
-<!-- 						<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}" > -->
-<!-- 							<div th:replace="questao/tipoQuestaoFragment :: aberta"></div> -->
-<!-- 						</div> -->
-<!-- 						<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA}"> -->
-<!-- 							<div th:replace="questao/tipoQuestaoFragment :: multipla"></div> -->
-<!-- 						</div> -->
-<!-- 						<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}"> -->
-<!-- 							<div th:replace="questao/tipoQuestaoFragment :: unica"></div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-
+				<div id="ajaxLoadedContent"></div>
 				
 				<div class="mb-3">
 					<p th:switch="${questao.idQuestao>0}">
@@ -88,9 +75,15 @@
 	</main>
 	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
 	<script th:inline="javascript">
+		function myFunction(e, idQuestao) {
+			var inputs = $(`[id^=${idQuestao}]`);
+		    inputs.get().forEach(function(el) { 
+		        el.checked = el == e && e.checked;
+		    }, this);
+		}
+	
 		/*<![CDATA][*/
 			$(document).ready(function () {
-				
 				
 				if((/*[[${questao.idQuestao}]]*/ null) > 0){
 					document.getElementById("idTipoQuestao").disabled = true;

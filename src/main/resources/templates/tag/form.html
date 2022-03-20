@@ -16,7 +16,7 @@
 			<h3>Gerenciar Tag</h3>
 
 			<div th:switch="${tag.idTag>0}">
-				<p th:case="${true}">Atualizacao</p>
+				<p th:case="${true}">Atualização</p>
 				<p th:case="*">Cadastro Tag</p>
 			</div>
 
@@ -25,9 +25,7 @@
 
 				<div class="mb-3">
 					<label class="form-label" for="nome">Tag</label> <input type="text" th:field="*{nome}"
-						class="form-control" placeholder="Identificação da Tag" th:errorclass="inputError"
-						autocomplete="off">
-					<span class="error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">campo invalido</span>
+						class="form-control" placeholder="Identificação da Tag" autocomplete="off">
 				</div>
 				<div class="mb-3">
 					<p th:switch="${tag.idTag>0}">

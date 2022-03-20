@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head th:replace="head :: head"></head>
+	
+	<body>
+	
+		<div th:replace="menu :: menu"></div>
+	
+		<main class="container">
+			<div class="bg-light p-5 rounded">
+				<form th:object="${prova}" action="/prova/salvar" method="POST">
+					<input type="hidden" th:field="*{idProva}" id="idProva">
+					<input type="hidden" th:field="*{status}" id="status">
+					<input type="hidden" th:field="*{tag}" id="tag">
+					<input type="hidden" th:field="*{titulo}" id="titulo">
+					<h2 class="mb-5" th:text="*{titulo}"></h2>
+					
+					<div th:each="q : *{questoes}">
+						<input type="hidden" th:field="*{questoes[__${qStat.index}__].idQuestaoHistorico}" id="idQuestaoHistorico">
+						<input type="hidden" th:field="*{questoes[__${qStat.index}__].enunciado}" id="enunciado">
+						<input type="hidden" th:field="*{questoes[__${qStat.index}__].tipoQuestao}" id="tipoQuestao">
+						<input type="hidden" th:field="*{questoes[__${qStat.index}__].dificuldade}" id="dificuldade">
+						<input type="hidden" th:field="*{questoes[__${qStat.index}__].valor}" id="valor">
+						<input type="hidden" th:field="*{questoes[__${qStat.index}__].idProva}" id="idProva">
+
+						<p style="font-size: 20px;" th:text="${qStat.index + 1} + ' - ' + ${q.enunciado}"></p>
+
+						<div class="mb-5" th:switch="${q.tipoQuestao}">
+							<div class="col-12" th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ABERTA}">
+								<label class="form-label" for="aberta">Resposta:</label>
+								<textarea class="form-control" th:field="*{questoes[__${qStat.index}__].respostas[0].resposta}"
+									name="aberta" placeholder="Responda aqui" rows="3" cols="40">
+								</textarea>
+							</div>
+							<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_UNICA}">
+								<div th:each="resp : *{questoes[__${qStat.index}__].respostas}" class="row">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].idRespostaHistorico}" id="idRespostaHistorico">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].idQuestaoHistorico}" id="idQuestaoHistorico">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}" id="resposta">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].respostaCorreta}" id="respostaCorreta">
+									<div class="col-1 center">
+										<input class="form-label" type="checkbox" th:onclick="myFunction(this, /*[[${q.idQuestaoHistorico}]]*/)" 
+											name="unica" th:id="${q.idQuestaoHistorico} + '_' + ${resp.idRespostaHistorico}"
+											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
+											style="height: 20px; width: 20px;">
+									</div>
+									<div class="col-11">
+										<label th:text="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}"
+											></label>
+									</div>
+								</div>
+							</div>
+							<div th:case="${T(br.com.geradorprova.model.enumeration.TipoQuestao).ESCOLHA_MULTIPLA}">
+								<div th:each="resp : *{questoes[__${qStat.index}__].respostas}" class="row">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].idRespostaHistorico}" id="idRespostaHistorico">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].idQuestaoHistorico}" id="idQuestaoHistorico">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}" id="resposta">
+									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].respostaCorreta}" id="respostaCorreta">
+									<div class="col-1 center mt-2">
+										<input class="form-label" type="checkbox" id="multipla"
+											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
+											style="height: 20px; width: 20px;">
+									</div>
+									<div class="col-11">
+										<label th:text="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].resposta}"
+											></label> 
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<button type="submit" class="btn-c btn btn-secondary active my-3">
+						Finalizar
+					</button>
+					
+				</form>
+			</div>
+		</main>
+		<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+		<script type="text/javascript">
+			function myFunction(e, idQuestao) {
+				var inputs = $(`[id^=${idQuestao}]`);
+			    inputs.get().forEach(function(el) { 
+			        el.checked = el == e && e.checked;
+			    }, this);
+			}
+		</script>
+	</body>
+</html>

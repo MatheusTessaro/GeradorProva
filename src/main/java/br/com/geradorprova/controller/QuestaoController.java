@@ -1,10 +1,9 @@
 package br.com.geradorprova.controller;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.geradorprova.model.Questao;
 import br.com.geradorprova.model.Resposta;
+import br.com.geradorprova.model.UserSingleton;
 import br.com.geradorprova.model.enumeration.TipoQuestao;
+import br.com.geradorprova.model.enumeration.TipoUsuario;
 import br.com.geradorprova.service.QuestaoService;
 
 @Controller
@@ -29,7 +30,13 @@ public class QuestaoController{
 
 	@GetMapping("/novo")
 	public String formNew(Model model) {
+		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/index";
+		}
+		
 		Questao questao = new Questao();
+//		questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
 		model.addAttribute(questao);
 		model.addAttribute("tagList", questaoService.findAllTags());
 		
@@ -37,7 +44,11 @@ public class QuestaoController{
 	}
 	
 	@PostMapping("/salvar")
-	public String save(@Valid Questao questao, Model model) {
+	public String save(Questao questao, Model model) {
+		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/index";
+		}
 		
 		questaoService.save(questao);
 		
@@ -47,6 +58,10 @@ public class QuestaoController{
 	@GetMapping("/deletar/{id}")
 	public String delete(@PathVariable Long id) {
 		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/index";
+		}
+		
 		questaoService.delete(id);
 		
 		return "redirect:/questao/listar";
@@ -54,6 +69,11 @@ public class QuestaoController{
 
 	@GetMapping("/editar/{id}")
 	public String formEdit(@PathVariable Long id, Model model) {
+		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/index";
+		}
+		
 		Questao questao = questaoService.findById(id);
 		
 		model.addAttribute("questao", questao);
@@ -64,6 +84,10 @@ public class QuestaoController{
 
 	@GetMapping("/listar")
 	public String list(Model model){
+		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/index";
+		}
 		
 		List<Questao> questoes = questaoService.listAll();
 		

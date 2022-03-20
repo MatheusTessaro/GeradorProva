@@ -1,8 +1,7 @@
 package br.com.geradorprova.controller;
 
 import java.util.List;
-
-import javax.validation.Valid;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.geradorprova.model.Prova;
+import br.com.geradorprova.model.UserSingleton;
+import br.com.geradorprova.model.enumeration.TipoUsuario;
 import br.com.geradorprova.service.ProvaService;
 
 @Controller
@@ -32,23 +33,23 @@ public class ProvaController {
 	}
 	
 	@PostMapping("/salvar")
-	public String save(@Valid Prova prova) {
+	public String save(Prova prova) {
+		
+		if(Objects.isNull(UserSingleton.getInstance())) {
+			return "redirect:/index";
+		}
 		
 		provaService.save(prova);
-		
-		return "redirect:/prova/listar";
-	}
-	
-	@PostMapping("/gerar")
-	public String generate(@Valid Prova prova) {
-		
-		provaService.generate(prova);
 		
 		return "redirect:/prova/listar";
 	}
 
 	@GetMapping("/deletar/{id}")
 	public String delete(@PathVariable Long id) {
+		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/index";
+		}
 		
 		provaService.delete(id);
 		
@@ -57,6 +58,11 @@ public class ProvaController {
 
 	@GetMapping("/realizar/{id}")
 	public String formExecProva(@PathVariable Long id, Model model) {
+		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.PROFESSOR.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/index";
+		}
+		
 		Prova prova = provaService.findById(id);
 		
 		model.addAttribute("prova", prova);
@@ -66,6 +72,11 @@ public class ProvaController {
 
 	@GetMapping("/listar")
 	public String list(Model model) {
+		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/index";
+		}
+		
 		List<Prova> provas = provaService.listAll();
 		model.addAttribute("provaList", provas);
 		
@@ -74,7 +85,12 @@ public class ProvaController {
 	
 	@GetMapping("/corrigir/{id}")
 	public String rectify(@PathVariable Long id, Model model) {
-		Prova prova = provaService.autoRectify(id);
+		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/index";
+		}
+		
+		Prova prova = provaService.rectify(id);
 		model.addAttribute("prova", prova);
 		
 		return "prova/corrigir.html";

@@ -8,8 +8,9 @@ create type prova_status as enum ('ABERTA', 'FINALIZADA', 'CORRIGIDA');
 create table tb_prova(
 	id_prova serial not null primary key,
 	titulo varchar(100) not null,
+	tag varchar(50),
 	status prova_status default 'ABERTA',
-	nota decimal(4,2)
+	nota decimal(5,2)
 );
 
 create table tb_tag(
@@ -41,8 +42,8 @@ create table tb_questao_historico(
 	enunciado varchar(100) not null,
 	tipo_questao tipo_questao not null,
 	dificuldade dificuldade not null,
-	valor decimal(4,2),
-	nota decimal(4,2),
+	valor decimal(5,2),
+	nota decimal(5,2),
 	id_prova int4,
 	constraint fk_questao_historico_prova foreign key(id_prova) references tb_prova(id_prova)
 );

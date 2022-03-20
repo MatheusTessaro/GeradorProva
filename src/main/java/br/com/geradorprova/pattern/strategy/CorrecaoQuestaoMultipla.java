@@ -9,8 +9,11 @@ public class CorrecaoQuestaoMultipla implements CorrecaoQuestaoStrategy{
 	public Double corrigir(QuestaoHistorico questao) {
 		
 		Double nota = 0.0;
-		Double notaAlternativa = questao.getValor() / questao.getRespostas().stream().filter(r -> r.getRespostaCorreta() == 1).count();
+		//valorQuestao / quantidade de alternativas corretas = valor por alternativa
+		Double notaAlternativa = questao.getValor() / questao.getRespostas().stream().filter(r -> r.getRespostaCorreta() == 1).count(); 
 		
+		//se uma alternativa foi selecionada e é a resposta correta, adiciona o valor da alternativa à nota.
+		//se foi selecionado porem não é a resposta correta, subtrai da nota o valor da alternativa.
 		for(RespostaHistorico resp : questao.getRespostas()) {
 			if(resp.getRespostaCorreta() == 1 && resp.getSelecionado() == 1) {
 				nota += notaAlternativa;

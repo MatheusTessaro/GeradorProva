@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import br.com.geradorprova.model.enumeration.Dificuldade;
 import br.com.geradorprova.model.enumeration.TipoQuestao;
@@ -50,6 +51,8 @@ public class QuestaoHistorico {
 	@Column
 	private Double nota;
 	
+	@Transient
+	private Integer acertou;
 	
 	public QuestaoHistorico parseQuestaoToHistorico() {
 		
@@ -123,6 +126,15 @@ public class QuestaoHistorico {
 	public void setNota(Double nota) {
 		this.nota = nota;
 	}
-	
 
+
+	public Integer getAcertou() {
+		return acertou;
+	}
+
+
+	public void setAcertou(Integer acertou) {
+		this.acertou = acertou;
+	}
+	
 }
