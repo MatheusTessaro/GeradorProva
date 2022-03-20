@@ -50,7 +50,7 @@ public class Resposta {
 		return respostaCorreta;
 	}
 
-	public void setRespostaCorreta(Integer respostaCorreta) {
+	public void setRespostaCorreta(@Value("${resposta.correta:0}") Integer respostaCorreta) {
 		if(respostaCorreta == null)
 			this.respostaCorreta = 0;
 		else

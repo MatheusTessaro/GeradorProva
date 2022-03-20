@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="head :: head"></div>
-<!-- <meta charset="utf-8"> -->
 <body> 
   <div th:replace="menu :: menu"></div>
   <!-- 
@@ -12,27 +11,15 @@
       <h2>Gerenciador de Provas</h2>
     </div>
   </main>
-  <div class="container">
-  <div class="row">
-  	<div class="col-md-4 center">
-  		<h2 class="mt-4">Gerenciar Provas</h2>
-	 	<a class="btn-b btn btn-secondary btn-lg px-5 mt-3" aria-current="page" th:href="@{/prova/listar}">Listar Provas</a><br>
-	 	<a class="btn-b btn btn-secondary btn-lg px-5 mt-2" aria-current="page" th:href="@{/prova/novo}">Cadastrar Prova</a>
-	 </div>
-	 <div class="col-md-4 center">	
-	 	<h2 class="mt-4">Gerenciar Tags</h2>
-	 	<a class="btn-b btn btn-secondary btn-lg px-5 mt-3" aria-current="page" th:href="@{/tag/listar}">Listar Tags</a><br>
-	 	<a class="btn-b btn btn-secondary btn-lg px-5 mt-2" aria-current="page" th:href="@{/tag/novo}">Cadastrar Tag</a><br>
+	<div class="container">
+		<div class="row">
+	  		<div class="col-md-4 center">
+	  			<h2 class="mt-4">Como deseja acessar o sistema?</h2>
+		 		<a class="btn-b btn btn-secondary btn-lg px-5 mt-3" aria-current="page" th:href="@{/login/{tipo}(tipo=${'PROFESSOR'})}">Professor</a><br>
+		 		<a class="btn-b btn btn-secondary btn-lg px-5 mt-2" aria-current="page" th:href="@{/login/{tipo}(tipo=${'ALUNO'})}">Aluno</a>
+			</div>
+		</div>
 	</div>
-
-  	<div class="col-md-4 center">
-  	<h2 class="mt-4">Gerenciar Questões</h2>
-	 	 <a class="btn-b btn btn-secondary btn-lg px-5 mt-3" aria-current="page" th:href="@{/questao/listar}">Listar Questões</a><br>
-        <a class="btn-b btn btn-secondary btn-lg px-5 mt-2 mb-5" aria-current="page" th:href="@{/questao/novo}">Cadastrar Questões</a>
-	</div>
-	</div>
-  </div>
-  
-  <script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
