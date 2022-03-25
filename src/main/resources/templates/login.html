@@ -1,33 +1,37 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="head :: head"></div>
-<body> 
+<body style="overflow: hidden;"> 
   <!-- 
     CONTEUDO DA PAGINA 
   -->
-  <main>
-    <div class="bg-light p-5 rounded">
-      <h2>Gerenciador de Provas</h2>
-    </div>
-  </main>
-	<div class="container">
+	<main>
+		<div class="bg-light p-5 rounded center">
+			<h2>Gerenciador de Provas</h2>
+		</div>
+	</main>
+	<div id="login" class="container">
 		<div class="row">
-	  		<div class="col-md-4 center">
-	  			<h2 class="mt-4">Faça login para acessar o sistema!</h2>
+	  		<div>
+	  			<h2 class="mt-4 mb-4 center">Faça login para acessar o sistema!</h2>
 	  			
 	  			<form th:object="${usuario}" action="/login" method="POST">
 				
-				<div class="mb-3">
-					<label class="form-label" for="login">Login</label> 
-					<input type="text" th:field="*{login}" class="form-control" placeholder="Login" autocomplete="off">
-					<label class="form-label" for="senha">Senha</label> 
-					<input type="password" th:field="*{senha}"class="form-control" placeholder="senha" autocomplete="off">
-				</div>
-				<div class="mb-3">
-						<button type="submit" class="btn-c btn btn-secondary active my-3"
-							th:text="Logar"></button>
-				</div>
-			</form>
+					<div class="mb-3">
+						<label class="form-label" for="login">Login</label> 
+						<input type="text" th:field="*{login}" class="form-control" 			placeholder="Login" autocomplete="off">
+						<label class="form-label" for="Senha">Senha</label> 
+						<input type="password" th:field="*{senha}"class="form-control" placeholder="senha" autocomplete="off">
+					</div>
+					<div class="mb-3">
+						<button 
+							type="submit" 
+							class="btn-c btn btn-secondary active my-3 "
+							th:text="Logar">
+						</button>
+					</div>
+
+				</form>
 			</div>
 		</div>
 	</div>
