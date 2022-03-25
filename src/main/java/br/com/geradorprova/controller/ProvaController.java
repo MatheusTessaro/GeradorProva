@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.geradorprova.model.Prova;
-import br.com.geradorprova.model.UserSingleton;
 import br.com.geradorprova.model.enumeration.TipoUsuario;
+import br.com.geradorprova.pattern.singleton.UserSingleton;
 import br.com.geradorprova.service.ProvaService;
 
 @Controller
@@ -25,6 +25,13 @@ public class ProvaController {
 	
 	@GetMapping("/novo")
 	public String formNew(Model model) {
+		
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
+		}
+		
 		Prova prova = new Prova();
 		model.addAttribute(prova);
 		model.addAttribute("tagList", provaService.findAllTags());
@@ -36,7 +43,7 @@ public class ProvaController {
 	public String save(Prova prova) {
 		
 		if(Objects.isNull(UserSingleton.getInstance())) {
-			return "redirect:/index";
+			return "redirect:/logout";
 		}
 		
 		provaService.save(prova);
@@ -47,8 +54,10 @@ public class ProvaController {
 	@GetMapping("/deletar/{id}")
 	public String delete(@PathVariable Long id) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		provaService.delete(id);
@@ -59,8 +68,10 @@ public class ProvaController {
 	@GetMapping("/realizar/{id}")
 	public String formExecProva(@PathVariable Long id, Model model) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.PROFESSOR.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.PROFESSOR.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		Prova prova = provaService.findById(id);
@@ -74,11 +85,12 @@ public class ProvaController {
 	public String list(Model model) {
 		
 		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+			return "redirect:/logout";
 		}
 		
 		List<Prova> provas = provaService.listAll();
 		model.addAttribute("provaList", provas);
+		model.addAttribute("usuario" ,UserSingleton.getInstance());
 		
 		return "prova/listar";
 	}
@@ -86,8 +98,10 @@ public class ProvaController {
 	@GetMapping("/corrigir/{id}")
 	public String rectify(@PathVariable Long id, Model model) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		Prova prova = provaService.rectify(id);

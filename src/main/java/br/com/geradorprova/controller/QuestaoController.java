@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.geradorprova.model.Questao;
 import br.com.geradorprova.model.Resposta;
-import br.com.geradorprova.model.UserSingleton;
 import br.com.geradorprova.model.enumeration.TipoQuestao;
 import br.com.geradorprova.model.enumeration.TipoUsuario;
+import br.com.geradorprova.pattern.singleton.UserSingleton;
 import br.com.geradorprova.service.QuestaoService;
 
 @Controller
@@ -31,12 +31,13 @@ public class QuestaoController{
 	@GetMapping("/novo")
 	public String formNew(Model model) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		Questao questao = new Questao();
-//		questao.setRespostas(Stream.generate(Resposta::new).limit(5).collect(Collectors.toList()));
 		model.addAttribute(questao);
 		model.addAttribute("tagList", questaoService.findAllTags());
 		
@@ -46,8 +47,10 @@ public class QuestaoController{
 	@PostMapping("/salvar")
 	public String save(Questao questao, Model model) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		questaoService.save(questao);
@@ -58,8 +61,10 @@ public class QuestaoController{
 	@GetMapping("/deletar/{id}")
 	public String delete(@PathVariable Long id) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		questaoService.delete(id);
@@ -70,8 +75,10 @@ public class QuestaoController{
 	@GetMapping("/editar/{id}")
 	public String formEdit(@PathVariable Long id, Model model) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		Questao questao = questaoService.findById(id);
@@ -86,12 +93,13 @@ public class QuestaoController{
 	public String list(Model model){
 		
 		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+			return "redirect:/logout";
 		}
 		
 		List<Questao> questoes = questaoService.listAll();
 		
 		model.addAttribute("questaoList", questoes);
+		model.addAttribute("usuario" ,UserSingleton.getInstance());
 		
 		return "questao/listar";
 	}

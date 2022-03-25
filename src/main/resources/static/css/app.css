@@ -37,3 +37,9 @@ div.row {
 label a {
 	text-decoration:none;
 }
+
+#login {
+	position: relative;
+    justify-content: right;
+    display: flex;
+}

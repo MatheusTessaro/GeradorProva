@@ -11,7 +11,7 @@
 			<div class="bg-light p-5 rounded">
 				<form th:object="${prova}" action="/prova/salvar" method="POST">
 					<input type="hidden" th:field="*{idProva}" id="idProva">
-					<input type="hidden" th:field="*{status}" id="status">
+					<input type="hidden" th:field="*{state}" id="state">
 					<input type="hidden" th:field="*{tag}" id="tag">
 					<input type="hidden" th:field="*{titulo}" id="titulo">
 					<h2 class="mb-5" th:text="*{titulo}"></h2>

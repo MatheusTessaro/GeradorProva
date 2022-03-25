@@ -6,10 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 @Table(name = "tb_resposta")
@@ -50,7 +46,7 @@ public class Resposta {
 		return respostaCorreta;
 	}
 
-	public void setRespostaCorreta(@Value("${resposta.correta:0}") Integer respostaCorreta) {
+	public void setRespostaCorreta(Integer respostaCorreta) {
 		if(respostaCorreta == null)
 			this.respostaCorreta = 0;
 		else

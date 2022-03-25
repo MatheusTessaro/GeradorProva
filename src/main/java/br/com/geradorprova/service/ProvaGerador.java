@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
@@ -18,7 +17,7 @@ import br.com.geradorprova.model.QuestaoHistorico;
 import br.com.geradorprova.model.Resposta;
 import br.com.geradorprova.model.RespostaHistorico;
 import br.com.geradorprova.model.enumeration.Dificuldade;
-import br.com.geradorprova.model.enumeration.ProvaStatus;
+import br.com.geradorprova.model.enumeration.ProvaState;
 import br.com.geradorprova.repository.QuestaoRepository;
 
 @Component
@@ -51,7 +50,7 @@ public class ProvaGerador {
 		//seta as questoes dentro do objeto prova, ja calculando o valor de cada questao.
 		prova.setQuestoes(calcValorQuestao(prova,  questoesProva));
 		
-		prova.setStatus(ProvaStatus.ABERTA);
+		prova.setState(ProvaState.ABERTA);
 
 		return prova;
 		
