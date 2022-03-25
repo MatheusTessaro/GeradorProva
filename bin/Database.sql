@@ -9,7 +9,7 @@ create table tb_prova(
 	id_prova serial not null primary key,
 	titulo varchar(100) not null,
 	tag varchar(50),
-	status prova_state default 'ABERTA',
+	state prova_state default 'ABERTA',
 	nota decimal(5,2)
 );
 

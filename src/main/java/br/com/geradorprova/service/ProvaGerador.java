@@ -43,9 +43,9 @@ public class ProvaGerador {
 		List<Questao> questoesDificeis = questoes.stream().filter(q -> q.getDificuldade().equals(Dificuldade.DIFICIL)).collect(Collectors.toList());
 		
 		//pega uma sub-lista da lista de questoes por dificuldade e converte para o objeto historico
-		questoesProva.addAll(addQuestaoToHistorico(questoesFaceis.subList(0, prova.getQtdeFacil())));
-		questoesProva.addAll(addQuestaoToHistorico(questoesMedias.subList(0, prova.getQtdeMedio())));
-		questoesProva.addAll(addQuestaoToHistorico(questoesDificeis.subList(0, prova.getQtdeDificil())));
+		if(!questoesFaceis.isEmpty())   {questoesProva.addAll(addQuestaoToHistorico(questoesFaceis.subList(0, prova.getQtdeFacil() > questoesFaceis.size() ? questoesFaceis.size() : prova.getQtdeFacil())));}
+		if(!questoesMedias.isEmpty())   {questoesProva.addAll(addQuestaoToHistorico(questoesMedias.subList(0, prova.getQtdeMedio() > questoesMedias.size() ? questoesMedias.size() : prova.getQtdeMedio())));}
+		if(!questoesDificeis.isEmpty()) {questoesProva.addAll(addQuestaoToHistorico(questoesDificeis.subList(0, prova.getQtdeDificil() > questoesDificeis.size() ? questoesDificeis.size() : prova.getQtdeDificil())));}
 		
 		//seta as questoes dentro do objeto prova, ja calculando o valor de cada questao.
 		prova.setQuestoes(calcValorQuestao(prova,  questoesProva));
