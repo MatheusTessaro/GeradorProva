@@ -1,6 +1,6 @@
 package br.com.geradorprova.model.enumeration;
 
-public enum ProvaStatus {
+public enum ProvaState {
 
 	ABERTA("Aberta"),
 	CORRIGIDA("Corrigida"),
@@ -9,7 +9,7 @@ public enum ProvaStatus {
 	
 	private String valor;
 
-	private ProvaStatus(String valor) {
+	private ProvaState(String valor) {
 		this.valor = valor;
 	}
 

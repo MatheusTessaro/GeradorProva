@@ -11,7 +11,7 @@
 			<div class="bg-light p-5 rounded">
 				<form th:object="${prova}" action="/prova/salvar" method="POST">
 					<input type="hidden" th:field="*{idProva}" id="idProva">
-					<input type="hidden" th:field="*{status}" id="status">
+					<input type="hidden" th:field="*{state}" id="state">
 					<input type="hidden" th:field="*{tag}" id="tag">
 					<input type="hidden" th:field="*{titulo}" id="titulo">
 					<h2 class="mb-5" th:text="*{titulo}"></h2>
@@ -54,6 +54,7 @@
 									<input type="hidden" th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" id="selecionado">
 									<div class="col-1 center">
 										<input class="form-label" type="RADIO" name="unica"
+											disabled
 											th:checked="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado == 1}"
 											th:field="*{questoes[__${qStat.index}__].respostas[__${respStat.index}__].selecionado}" th:value="${1}"
 											style="height: 20px; width: 20px;">

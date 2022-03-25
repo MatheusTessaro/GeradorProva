@@ -14,7 +14,8 @@
     CONTEUDO DA PAGINA 
   -->
 	<main class="container">
-		<a class="btn-c btn btn-secondary active my-3" role="button" th:href="@{/prova/novo}"> <i
+		<a th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}"
+			class="btn-c btn btn-secondary active my-3" role="button" th:href="@{/prova/novo}"> <i
 				class="bi bi-plus-square"></i> Prova
 		</a>
 
@@ -30,10 +31,13 @@
 							<th style="width: 50px">ID</th>
 							<th>Título da Prova</th>
 							<th>Tag</th>
-							<th style="width: 150px">Status</th>
+							<th style="width: 150px">Estado</th>
 							<th style="width: 50px">Nota</th>
 							<th style="width: 50px">Ação</th>
-							<th style="width: 50px">Deletar</th>
+							<th th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}"
+								style="width: 50px">
+								Deletar
+							</th>
 						</tr>
 					</thead>
 
@@ -42,27 +46,31 @@
 							<td class="center" th:text="${prova.idProva}" />
 							<td th:text="${prova.titulo}" />
 							<td th:text="${prova.tag}" />
-							<td th:switch="${prova.status}">
-								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).FINALIZADA}">
+							<td th:switch="${prova.state}">
+								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaState).FINALIZADA}">
 									Finalizada
 								</div>
-								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).CORRIGIDA}">
+								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaState).CORRIGIDA}">
 									Corrigida
 								</div>
-								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).ABERTA}">
+								<div th:case="${T(br.com.geradorprova.model.enumeration.ProvaState).ABERTA}">
 									Aberta
 								</div>
 							</td>
 							<td th:text="${prova.nota}" />
-							<td class="center" th:switch="${prova.status}">
-								<a th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).ABERTA}" th:href="@{/prova/realizar/{id}(id=${prova.idProva})}">
+							<td class="center" th:switch="${prova.state}">
+								<a th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).PROFESSOR}"
+									th:case="${T(br.com.geradorprova.model.enumeration.ProvaState).ABERTA}" th:href="@{/prova/realizar/{id}(id=${prova.idProva})}">
 									Realizar
 								</a>	
-								<a th:case="${T(br.com.geradorprova.model.enumeration.ProvaStatus).FINALIZADA}" th:href="@{/prova/corrigir/{id}(id=${prova.idProva})}">
+								<a th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}"
+									th:case="${T(br.com.geradorprova.model.enumeration.ProvaState).FINALIZADA}" th:href="@{/prova/corrigir/{id}(id=${prova.idProva})}">
 									Corrigir
 								</a>
+								<i th:case="*" class="bi bi-check-square" style="color: #34eb37"></i>
 							</td>
-							<td class="center"><a th:href="@{/prova/deletar/{id}(id=${prova.idProva})}">
+							<td th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}"
+								class="center"><a th:href="@{/prova/deletar/{id}(id=${prova.idProva})}">
 									<i class="bi bi-trash" title="delete"></i>
 								</a></td>
 						</tr>

@@ -16,7 +16,8 @@
     CONTEUDO DA PAGINA 
   -->
 	<main class="container">
-		<a class="btn-c btn btn-secondary active my-3" role="button" th:href="@{/tag/novo}"> <i
+		<a th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}"
+			class="btn-c btn btn-secondary active my-3" role="button" th:href="@{/tag/novo}"> <i
 				class="bi bi-plus-square"></i>
 			Tag
 		</a>
@@ -30,14 +31,17 @@
 						<tr>
 							<th style="width: 50px">ID</th>
 							<th>Tag</th>
-							<th style="width: 50px">Editar</th>
+							<th th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}" 
+								style="width: 50px">
+								Editar
+							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="tag: ${tagList}">
 							<td th:text="${tag.idTag}" />
 							<td th:text="${tag.nome}" />
-							<td>
+							<td th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}">
 								<a th:href="@{/tag/editar/{id}(id=${tag.idTag})}"> <i
 										class=" bi bi-pencil-square" title="editar"></i>
 								</a>

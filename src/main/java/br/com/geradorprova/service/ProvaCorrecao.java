@@ -22,15 +22,13 @@ public class ProvaCorrecao {
 	public Prova autoRectify(Prova prova) {
 		
 		CorrecaoQuestaoStrategy correcaoStrategy; 
-		
-		FactoryCorrecaoStrategy factory = FactoryCorrecaoStrategy.getInstance();
 
 		for(QuestaoHistorico questao : prova.getQuestoes()) {
 			if(questao.getTipoQuestao().equals(TipoQuestao.ABERTA)) {
 				continue; // <- ignora as questões que são abertas.
 			}
 			
-			correcaoStrategy = FactoryCorrecaoStrategy.getInstance().createStrategy(questao.getTipoQuestao().toString());
+			correcaoStrategy = FactoryCorrecaoStrategy.createStrategy(questao.getTipoQuestao().toString());
 			questao.setNota(correcaoStrategy.corrigir(questao));
 		}
 		

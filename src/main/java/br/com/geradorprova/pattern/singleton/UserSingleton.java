@@ -1,4 +1,4 @@
-package br.com.geradorprova.model;
+package br.com.geradorprova.pattern.singleton;
 
 import java.util.Objects;
 
@@ -23,6 +23,11 @@ public class UserSingleton {
 		return instance;
 	}
 
+	public static void destroyInstance() {
+		
+		instance = null;
+	}
+	
 	public TipoUsuario getTipo() {
 		return tipo;
 	}
@@ -31,9 +36,4 @@ public class UserSingleton {
 		this.tipo = tipo;
 	}
 
-	public static void destroyInstance() {
-		
-		instance = null;
-	}
-	
 }

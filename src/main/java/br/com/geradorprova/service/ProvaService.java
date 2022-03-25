@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.geradorprova.model.Prova;
 import br.com.geradorprova.model.Tag;
-import br.com.geradorprova.model.enumeration.ProvaStatus;
+import br.com.geradorprova.model.enumeration.ProvaState;
 import br.com.geradorprova.repository.ProvaRepository;
 import br.com.geradorprova.repository.TagRepository;
 
@@ -29,12 +29,12 @@ public class ProvaService{
 	ProvaCorrecao correcao;
 	
 	public void save(Prova prova) {
-		if(Objects.isNull(prova.getStatus())) {
+		if(Objects.isNull(prova.getState())) {
 			prova = gerador.generate(prova);
-		}else if(prova.getStatus().equals(ProvaStatus.ABERTA)) {
-			prova.setStatus(ProvaStatus.FINALIZADA);
-		}else if(prova.getStatus().equals(ProvaStatus.FINALIZADA)) {
-			prova.setStatus(ProvaStatus.CORRIGIDA);
+		}else if(prova.getState().equals(ProvaState.ABERTA)) {
+			prova.setState(ProvaState.FINALIZADA);
+		}else if(prova.getState().equals(ProvaState.FINALIZADA)) {
+			prova.setState(ProvaState.CORRIGIDA);
 			prova = correcao.calcNotaProva(prova);
 		}
 		

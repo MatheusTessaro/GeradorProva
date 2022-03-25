@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.geradorprova.model.Tag;
-import br.com.geradorprova.model.UserSingleton;
 import br.com.geradorprova.model.enumeration.TipoUsuario;
+import br.com.geradorprova.pattern.singleton.UserSingleton;
 import br.com.geradorprova.service.TagService;
 
 @Controller
@@ -25,9 +25,10 @@ public class TagController {
 	@GetMapping("/novo")
 	public String tagFormNew(Model model) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		Tag tag = new Tag();
@@ -39,8 +40,10 @@ public class TagController {
 	@PostMapping("/salvar")
 	public String save(Tag tag, Model model) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		tagService.save(tag);
@@ -51,8 +54,10 @@ public class TagController {
 	@GetMapping("/deletar/{id}")
 	public String delete(@PathVariable Long id) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		tagService.delete(id);
@@ -63,8 +68,10 @@ public class TagController {
 	@GetMapping("/editar/{id}")
 	public String formEdit(@PathVariable Long id, Model model) {
 		
-		if(Objects.isNull(UserSingleton.getInstance().getTipo()) || TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/logout";
+		}else if(TipoUsuario.ALUNO.equals(UserSingleton.getInstance().getTipo())) {
+			return "redirect:/home";
 		}
 		
 		Tag tag = tagService.findById(id);
@@ -77,10 +84,11 @@ public class TagController {
 	public String list(Model model) {
 		
 		if(Objects.isNull(UserSingleton.getInstance().getTipo())) {
-			return "redirect:/index";
+			return "redirect:/logout";
 		}
 		
 		model.addAttribute("tagList", tagService.list());
+		model.addAttribute("usuario" ,UserSingleton.getInstance());
 		
 		return "tag/listar.html";
 	}

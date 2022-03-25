@@ -16,10 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
-import br.com.geradorprova.model.enumeration.ProvaStatus;
+import br.com.geradorprova.model.enumeration.ProvaState;
 
 @Entity
 @Table(name = "tb_prova")
@@ -35,7 +32,7 @@ public class Prova {
 	
 	@Column
 	@Enumerated(EnumType.STRING)
-	private ProvaStatus status;
+	private ProvaState state;
 	
 	@Column
 	private String tag;
@@ -92,14 +89,13 @@ public class Prova {
 		this.tag = tag;
 	}
 
-	public ProvaStatus getStatus() {
-		return status;
+	public ProvaState getState() {
+		return state;
 	}
 
-	public void setStatus(ProvaStatus status) {
-		this.status = status;
+	public void setState(ProvaState state) {
+		this.state = state;
 	}
-
 
 	public List<QuestaoHistorico> getQuestoes() {
 		return questoes;

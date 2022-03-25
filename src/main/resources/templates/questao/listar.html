@@ -13,7 +13,8 @@
     CONTEUDO DA PAGINA 
   -->
 	<main class="container">
-		<a class="btn btn-c btn-secondary active my-3" role="button"
+		<a th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}"
+			class="btn btn-c btn-secondary active my-3" role="button"
 			th:href="@{/questao/novo}"> <i class="bi bi-plus-square"></i>
 			Questão
 		</a>
@@ -29,8 +30,14 @@
 							<th>Enunciado</th>
 							<th>Tag</th>
 							<th style= "width: 50px">Dificuldade</th>
-							<th style= "width: 50px">Editar</th>
-							<th style= "width: 50px">Deletar</th>
+							<th th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}"
+								style= "width: 50px">
+								Editar
+							</th>
+							<th th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}"
+								style= "width: 50px">
+								Deletar
+							</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -39,12 +46,12 @@
 							<td th:text="${q.enunciado}" />
 							<td th:text="${q.tag.nome}" />
 							<td th:text="${q.dificuldade}" />
-							<td>
+							<td th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}">
 								<a th:href="@{/questao/editar/{id}(id=${q.idQuestao})}"> <i class="bi bi-pencil-square"
 										title="editar"></i>
 								</a>
 							</td>
-							<td>
+							<td th:if="${usuario.tipo != T(br.com.geradorprova.model.enumeration.TipoUsuario).ALUNO}">
 								<a th:href="@{/questao/deletar/{id}(id=${q.idQuestao})}"> <i class="bi bi-trash"
 										title="delete"></i>
 								</a>

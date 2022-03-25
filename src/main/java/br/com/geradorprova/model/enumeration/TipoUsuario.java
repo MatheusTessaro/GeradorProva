@@ -2,5 +2,5 @@ package br.com.geradorprova.model.enumeration;
 
 public enum TipoUsuario {
 
-	ALUNO, PROFESSOR;
+	ALUNO, PROFESSOR, ADMIN;
 }

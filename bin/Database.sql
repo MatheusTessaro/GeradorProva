@@ -1,15 +1,15 @@
-drop database gerador_prova; 
 create database gerador_prova;
 
 create type tipo_questao as enum ('ABERTA', 'ESCOLHA_UNICA', 'ESCOLHA_MULTIPLA');
 create type dificuldade as enum ('FACIL', 'MEDIO', 'DIFICIL');
-create type prova_status as enum ('ABERTA', 'FINALIZADA', 'CORRIGIDA');
+create type prova_state as enum ('ABERTA', 'FINALIZADA', 'CORRIGIDA');
+create type tipo_usuario as enum ('ALUNO', 'PROFESSOR', 'ADMIN');
 
 create table tb_prova(
 	id_prova serial not null primary key,
 	titulo varchar(100) not null,
 	tag varchar(50),
-	status prova_status default 'ABERTA',
+	status prova_state default 'ABERTA',
 	nota decimal(5,2)
 );
 
@@ -56,3 +56,16 @@ create table tb_resposta_historico(
 	id_questao_historico int4,
 	constraint fk_resposta_historico_questao foreign key(id_questao_historico) references tb_questao_historico(id_questao_historico) 
 );
+
+
+create table tb_usuario(
+	id_usuario serial not null primary key,
+	nome varchar(50) not null,
+	login varchar(50) not null,
+	senha varchar(50) not null,
+	tipo tipo_usuario not null 
+);
+
+insert into tb_usuario (nome, login, senha, tipo) values ('admin', 'admin', 'admin', 'ADMIN');
+insert into tb_usuario (nome, login, senha, tipo) values ('aluno', 'aluno', 'aluno', 'ALUNO');
+insert into tb_usuario (nome, login, senha, tipo) values ('professor', 'professor', 'professor', 'PROFESSOR');
